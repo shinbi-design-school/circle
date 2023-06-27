@@ -10,15 +10,8 @@ public class Quiz {
 	private int correctCount;
 	private QuizDAO dao;
 	private List<Integer> history;
-	
-	/*
-	 * state
-	 * 0:クイズスタート前
-	 * 1:クイズ出題
-	 * 2:クイズ答え合わせ
-	 * 4:クイズ終了
-	 */
-	private int state;
+	private String state;
+	private int answered;
 		
 	public Quiz(QuizDAO dao) throws SQLException {
 		this.dao = dao;
@@ -29,20 +22,32 @@ public class Quiz {
 		this.questions = dao.choiceQuestions();
 		//データベースのrand()でシャッフルされているのでコメントアウト
 		//Collections.shuffle(questions);
-		correctCount = 0;
-		state = 0;
+		this.correctCount = 0;
+		this.answered = 0;
+		this.state = null;
 	}
 	
-	public Question ask() {
-		
-		return null;
-	}
-	
-	public int getState() {
+	public String getState() {
 		return state;
 	}
 	
+	public void setState(String state) {
+		this.state = state;
+	}
+	
+	public int getAnswered() {
+		return answered;
+	}
+
+	public void setAnswered(int answered) {
+		this.answered = answered;
+	}
+
 	public int getCorrectCount() {
 		return correctCount;
+	}
+	
+	public double getCorrectRate() {
+		return getCorrectCount() / questions.size(); 
 	}
 }
