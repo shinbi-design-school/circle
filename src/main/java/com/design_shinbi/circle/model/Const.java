@@ -6,4 +6,6 @@ public class Const {
 	public static final String DEFAULT_USER_PASSWORD = "administrator";
 	
 	public static final String LOGIN_USER_KEY = "LOGIN_USER";
+	
+	public static final int QUIZ_CHOICE_VALUE = 5 ;
 }
