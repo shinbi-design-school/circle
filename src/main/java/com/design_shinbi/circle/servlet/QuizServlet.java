@@ -40,15 +40,16 @@ public class QuizServlet extends HttpServlet{
 		
 		if (quiz != null) {
 			if (quiz.getState().equals("standby")) {
-				jsp = "/WEB-INF/start.jsp";
+				session.setAttribute("question", quiz.pickQuestion());
+				jsp = "/WEB-INF/jsp/play.jsp";
 			} else if(quiz.getAnswered() < Const.QUIZ_CHOICE_VALUE) {
 				session.setAttribute("question", quiz.pickQuestion());
-				jsp = "/WEB-INF/play.jsp";
+				jsp = "/WEB-INF/jsp/play.jsp";
 			} else {
-				jsp = "/WEB-INF/result.jsp";
+				jsp = "/WEB-INF/jsp/result.jsp";
 			}
 		} else {
-			jsp = "/WEB-INF/error.jsp";
+			jsp = "/WEB-INF/jsp/error.jsp";
 		}
 				
 		RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);

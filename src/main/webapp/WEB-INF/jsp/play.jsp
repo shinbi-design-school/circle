@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.design_shinbi.circle.model.Question" %>
+<%@ page import="java.util.List" %>
 
 <%
-	Question question = (Question)session.getAttibute("question");
+	Question question = (Question)session.getAttribute("question");
 	List<String> choices = question.getChoices();
 %>
 <!DOCTYPE html>
@@ -43,5 +44,4 @@
     </div>
 </body>
 </html>
-<%
 	
