@@ -1,5 +1,6 @@
 package com.design_shinbi.circle.model;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Question {
 	private String choice2;
 	private String choice3;
 	private String choice4;
-	private List<Integer> choices;
+	private List<String> choices;
 //	private Blob imagec;
 //	private Blob image2;
 //	private Blob image3;
@@ -27,10 +28,12 @@ public class Question {
 		this.choice2 = choice2;
 		this.choice3 = choice3;
 		this.choice4 = choice4;
-//		this.imagec = imagec;
-//		this.image2 = image2;
-//		this.image3 = image3;
-//		this.image4 = image4;
+		this.choices = Arrays.asList(correct, choice2, choice3, choice4);
+		this.shuffle();
+		//this.imagec = imagec;
+		//this.image2 = image2;
+		//this.image3 = image3;
+		//this.image4 = image4;
 	}
 	
 	public String getSentence() {
@@ -61,8 +64,8 @@ public class Question {
 		Collections.shuffle(choices);
 	}
 	
-	public boolean isCorrect(String ) {
-		
+	public boolean isCorrect(String userChoice) {
+		return correct.equals(userChoice);
 	}
 
 	public static Question createQuestion(String sentence, String genre, String correct, String choice2,
