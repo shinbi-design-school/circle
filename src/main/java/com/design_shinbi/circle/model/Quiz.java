@@ -9,7 +9,6 @@ public class Quiz {
 	private List<Question> questions;
 	private int correctCount;
 	private QuizDAO dao;
-	private List<Integer> history;
 	private String state;
 	private int answered;
 		
@@ -53,5 +52,10 @@ public class Quiz {
 	
 	public void setQuestions() throws SQLException {
 		this.questions = this.dao.choiceQuestions();
+	}
+	
+	//テスト用
+	public Question pickQuestion() {
+		return questions.get(0);
 	}
 }

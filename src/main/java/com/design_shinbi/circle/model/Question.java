@@ -16,6 +16,7 @@ public class Question {
 	private String choice3;
 	private String choice4;
 	private List<String> choices;
+	private String answered;
 //	private Blob imagec;
 //	private Blob image2;
 //	private Blob image3;
@@ -44,20 +45,12 @@ public class Question {
 		return genre;
 	}
 
-	public String getCorrect() {
-		return correct;
+	public List<String> getChoices() {
+		return choices;
 	}
-
-	public String getChoice2() {
-		return choice2;
-	}
-
-	public String getChoice3() {
-		return choice3;
-	}
-
-	public String getChoice4() {
-		return choice4;
+	
+	public void setAnswered(String answer) {
+		this.answered = answer;
 	}
 	
 	public void shuffle() {
@@ -71,7 +64,7 @@ public class Question {
 	public static Question createQuestion(String sentence, String genre, String correct, String choice2,
 			String choice3, String choice4) {
 		Question question = new Question(sentence, genre, correct, choice2, choice3, choice4);
-		return null;
+		return question;
 	}
 
 //	public static Question createQuestion(String sentence, String genre, String correct, String choice2,
@@ -80,6 +73,10 @@ public class Question {
 //				imagec, image2, image3, image4);
 //		return question;
 //	}
-
+	
+	@Override
+	public String toString() {
+		return sentence;
+	}
 	
 }
