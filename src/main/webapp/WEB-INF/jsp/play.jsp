@@ -8,11 +8,25 @@
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
-
+	<form method="POST" action="/play">
+		<div>
+			<input id="choice" type="radio" name="userChoice" value="<%= %>">
+			
+		</div>
+		<div>
+			<input id="choice" type="radio" name="userChoice" value="<%= %>">
+			
+		</div>
+		<div>
+			<input id="choice" type="radio" name="userChoice" value="<%= %>">
+			
+		</div>
+		<div>
+			<input id="choice" type="radio" name="userChoice" value="<%= %>">
+			
+		</div>
+</body>
+</html>
 <%
 	
