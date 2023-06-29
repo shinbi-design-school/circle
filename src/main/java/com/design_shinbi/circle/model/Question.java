@@ -44,20 +44,8 @@ public class Question {
 		return genre;
 	}
 
-	public String getCorrect() {
-		return correct;
-	}
-
-	public String getChoice2() {
-		return choice2;
-	}
-
-	public String getChoice3() {
-		return choice3;
-	}
-
-	public String getChoice4() {
-		return choice4;
+	public String getChoices(int index) {
+		return choices.get(index);
 	}
 	
 	public void shuffle() {
@@ -71,7 +59,7 @@ public class Question {
 	public static Question createQuestion(String sentence, String genre, String correct, String choice2,
 			String choice3, String choice4) {
 		Question question = new Question(sentence, genre, correct, choice2, choice3, choice4);
-		return null;
+		return question;
 	}
 
 //	public static Question createQuestion(String sentence, String genre, String correct, String choice2,
@@ -80,6 +68,10 @@ public class Question {
 //				imagec, image2, image3, image4);
 //		return question;
 //	}
-
+	
+	@Override
+	public String toString() {
+		return sentence;
+	}
 	
 }

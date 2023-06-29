@@ -42,6 +42,7 @@ public class QuizServlet extends HttpServlet{
 			if (quiz.getState().equals("standby")) {
 				jsp = "/WEB-INF/start.jsp";
 			} else if(quiz.getAnswered() < Const.QUIZ_CHOICE_VALUE) {
+				session.setAttribute("question", quiz.pickQuestion());
 				jsp = "/WEB-INF/play.jsp";
 			} else {
 				jsp = "/WEB-INF/result.jsp";
