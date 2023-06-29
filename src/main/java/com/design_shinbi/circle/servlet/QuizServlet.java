@@ -24,7 +24,7 @@ public class QuizServlet extends HttpServlet{
 		String jsp = null;
 		HttpSession session = req.getSession();
 		Quiz quiz = (Quiz)session.getAttribute("quiz");
-		if (quiz == null) {				
+		if (quiz == null) {
 		
 			try (Connection connection = DbUtil.connect()){
 				QuizDAO dao = new QuizDAO(connection);
@@ -53,5 +53,7 @@ public class QuizServlet extends HttpServlet{
 		RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);
 		dispatcher.forward(req, resp);
 	}
+
+	
 	
 }
