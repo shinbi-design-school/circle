@@ -66,8 +66,12 @@ public class Question {
 		return this.getChoices().get(index);
 	}
 	
-	public void shuffle() {
+	private void shuffle() {
 		Collections.shuffle(choices);
+		this.setCorrectIndex();
+	}
+	
+	private void setCorrectIndex(){
 		this.correctIndex = choices.indexOf(correct);
 	}
 	

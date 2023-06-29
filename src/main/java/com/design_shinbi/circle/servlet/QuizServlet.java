@@ -28,7 +28,7 @@ public class QuizServlet extends HttpServlet{
 				jsp = "/WEB-INF/jsp/standby.jsp";
 				
 			} else if(quiz.getState().equals("playing")) {
-				session.setAttribute("question", quiz.pickQuestion());
+				session.setAttribute("question", quiz.pick());
 				playProcess(quiz, req);
 				jsp = "/WEB-INF/jsp/play.jsp";
 				
@@ -48,8 +48,8 @@ public class QuizServlet extends HttpServlet{
 	private void playProcess(Quiz quiz, HttpServletRequest req) {
 		String userChoice = req.getParameter("userChoice"); 
 		if (userChoice != null) {
-			if (quiz.pickQuestion().getUserAnswered() == -1) {
-				quiz.pickQuestion().setUserAnswered(userChoice);
+			if (quiz.pick().getUserAnswered() == -1) {
+				quiz.pick().setUserAnswered(userChoice);
 				quiz.setAnswered(quiz.getAnswered() + 1);
 			}
 		}

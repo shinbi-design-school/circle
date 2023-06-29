@@ -19,7 +19,7 @@ class QuizTest {
 		QuizDAO dao = new QuizDAO(connection);
 		Quiz testQuiz = new Quiz(dao);
 		testQuiz.init();
-		Question question = testQuiz.pickQuestion();
+		Question question = testQuiz.pick();
 
 		int correctUserChoice = 1;
 		if(question.isCorrect(correctUserChoice)) {

@@ -89,7 +89,7 @@ public class Quiz {
 		this.questions = this.dao.choiceQuestions();
 	}
 	
-	public Question pickQuestion() {
+	public Question pick() {
 		return questions.get(this.getAnswered());
 	}
 }
