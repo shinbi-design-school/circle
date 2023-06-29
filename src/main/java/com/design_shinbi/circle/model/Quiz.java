@@ -9,7 +9,6 @@ public class Quiz {
 	private List<Question> questions;
 	private int correctCount;
 	private QuizDAO dao;
-	private List<Integer> history;
 	private String state;
 	private int answered;
 		

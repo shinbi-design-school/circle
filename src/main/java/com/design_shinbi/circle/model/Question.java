@@ -16,6 +16,7 @@ public class Question {
 	private String choice3;
 	private String choice4;
 	private List<String> choices;
+	private String answered;
 //	private Blob imagec;
 //	private Blob image2;
 //	private Blob image3;
@@ -44,8 +45,12 @@ public class Question {
 		return genre;
 	}
 
-	public String getChoices(int index) {
-		return choices.get(index);
+	public List<String> getChoices() {
+		return choices;
+	}
+	
+	public void setAnswered(String answer) {
+		this.answered = answer;
 	}
 	
 	public void shuffle() {

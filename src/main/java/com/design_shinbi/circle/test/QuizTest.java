@@ -20,7 +20,14 @@ class QuizTest {
 		Quiz testQuiz = new Quiz(dao);
 		testQuiz.init();
 		Question question = testQuiz.pickQuestion();
-		System.out.println(question);
+
+		String correctUserChoice = "正解の選択肢1";
+		if(question.isCorrect(correctUserChoice)) {
+			System.out.println("正解");
+		}else {
+			System.out.println("不正解");
+		}
+		
 	}
 
 }
