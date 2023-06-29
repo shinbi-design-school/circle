@@ -21,7 +21,7 @@ class QuizTest {
 		testQuiz.init();
 		Question question = testQuiz.pickQuestion();
 
-		String correctUserChoice = "正解の選択肢1";
+		int correctUserChoice = 1;
 		if(question.isCorrect(correctUserChoice)) {
 			System.out.println("正解");
 		}else {

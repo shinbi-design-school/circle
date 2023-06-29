@@ -16,6 +16,7 @@ public class Question {
 	private String choice3;
 	private String choice4;
 	private List<String> choices;
+	private int correctIndex;
 	private String answered;
 //	private Blob imagec;
 //	private Blob image2;
@@ -55,10 +56,16 @@ public class Question {
 	
 	public void shuffle() {
 		Collections.shuffle(choices);
+		this.correctIndex = choices.indexOf(correct);
 	}
 	
-	public boolean isCorrect(String userChoice) {
-		return correct.equals(userChoice);
+	//ここを番号で正解かどうか識別できるように変更
+	public boolean isCorrect(int userChoice) {
+		if (userChoice > 3) {
+			return false;
+		}		
+		
+		return userChoice == this.correctIndex;
 	}
 
 	public static Question createQuestion(String sentence, String genre, String correct, String choice2,
