@@ -1,5 +1,8 @@
 package com.design_shinbi.circle.model;
 
+import java.util.Collections;
+import java.util.List;
+
 /*
  * image系フィールドはnullになる場合があること、ファイル名フィールドが必要なこと、Blobからの変更が必要なことから保留
  * */
@@ -11,6 +14,7 @@ public class Question {
 	private String choice2;
 	private String choice3;
 	private String choice4;
+	private List<Integer> choices;
 //	private Blob imagec;
 //	private Blob image2;
 //	private Blob image3;
@@ -51,6 +55,14 @@ public class Question {
 
 	public String getChoice4() {
 		return choice4;
+	}
+	
+	public void shuffle() {
+		Collections.shuffle(choices);
+	}
+	
+	public boolean isCorrect(String ) {
+		
 	}
 
 	public static Question createQuestion(String sentence, String genre, String correct, String choice2,

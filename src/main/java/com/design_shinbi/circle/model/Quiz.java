@@ -50,4 +50,8 @@ public class Quiz {
 	public double getCorrectRate() {
 		return getCorrectCount() / questions.size(); 
 	}
+	
+	public void setQuestions() throws SQLException {
+		this.questions = this.dao.choiceQuestions();
+	}
 }
