@@ -1,6 +1,7 @@
 package com.design_shinbi.circle.model;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.design_shinbi.circle.model.dao.QuizDAO;
@@ -11,6 +12,8 @@ public class Quiz {
 	private QuizDAO dao;
 	private String state;
 	private int answered;
+	private LocalDateTime startTime;
+	private LocalDateTime finishTime;
 		
 	public Quiz(QuizDAO dao) throws SQLException {
 		this.dao = dao;
@@ -23,7 +26,8 @@ public class Quiz {
 		//Collections.shuffle(questions);
 		this.correctCount = 0;
 		this.answered = 0;
-		this.state = null;
+		this.state = "standby";
+		this.startTime = LocalDateTime.now();
 	}
 	
 	public String getState() {
@@ -32,6 +36,25 @@ public class Quiz {
 	
 	public void setState(String state) {
 		this.state = state;
+	}
+	
+	public void chkState() {
+		if (this.getAnswered() >= Const.QUIZ_CHOICE_VALUE) {
+			if (this.getState().equals("playing")) {
+				this.setState("finish");
+			} else {
+				this.setState("standby");
+			}
+		} else {
+			if (this.getState().equals("finish")){
+				this.setState("standby");
+			}
+		}
+		
+		if (this.getState().equals("standby")) {
+			this.setAnswered(0);
+		}
+		
 	}
 	
 	public int getAnswered() {
@@ -49,13 +72,24 @@ public class Quiz {
 	public double getCorrectRate() {
 		return getCorrectCount() / questions.size(); 
 	}
-	
+		
+	public LocalDateTime getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(LocalDateTime finishTime) {
+		this.finishTime = finishTime;
+	}
+
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+
 	public void setQuestions() throws SQLException {
 		this.questions = this.dao.choiceQuestions();
 	}
 	
-	//テスト用
 	public Question pickQuestion() {
-		return questions.get(0);
+		return questions.get(this.getAnswered());
 	}
 }

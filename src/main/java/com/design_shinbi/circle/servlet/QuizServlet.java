@@ -1,7 +1,6 @@
 package com.design_shinbi.circle.servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.design_shinbi.circle.model.Const;
 import com.design_shinbi.circle.model.Quiz;
-import com.design_shinbi.circle.model.dao.QuizDAO;
-import com.design_shinbi.circle.util.DbUtil;
 
 @WebServlet("/play")
 public class QuizServlet extends HttpServlet{
@@ -24,38 +21,47 @@ public class QuizServlet extends HttpServlet{
 		String jsp = null;
 		HttpSession session = req.getSession();
 		Quiz quiz = (Quiz)session.getAttribute("quiz");
-		if (quiz == null) {
-		
-			try (Connection connection = DbUtil.connect()){
-				QuizDAO dao = new QuizDAO(connection);
-				quiz = new Quiz(dao);	
-				connection.close();
-				
-				quiz.setState("standby");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
+						
 		if (quiz != null) {
+			quiz.chkState();
 			if (quiz.getState().equals("standby")) {
+				jsp = "/WEB-INF/jsp/standby.jsp";
+				
+			} else if(quiz.getState().equals("playing")) {
 				session.setAttribute("question", quiz.pickQuestion());
+				playProcess(quiz, req);
 				jsp = "/WEB-INF/jsp/play.jsp";
-			} else if(quiz.getAnswered() < Const.QUIZ_CHOICE_VALUE) {
-				session.setAttribute("question", quiz.pickQuestion());
-				jsp = "/WEB-INF/jsp/play.jsp";
-			} else {
+				
+			} else if(quiz.getState().equals("finish")) {
+				resultProcess();
 				jsp = "/WEB-INF/jsp/result.jsp";
 			}
 		} else {
-			jsp = "/WEB-INF/jsp/error.jsp";
+			jsp = "/WEB-INF/jsp/standby.jsp";
 		}
 				
 		RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);
 		dispatcher.forward(req, resp);
 	}
-
 	
+	/* プレイ中の処理 */
+	private void playProcess(Quiz quiz, HttpServletRequest req) {
+		String userChoice = req.getParameter("userChoice"); 
+		if (userChoice != null) {
+			if (quiz.pickQuestion().getUserAnswered() == -1) {
+				quiz.pickQuestion().setUserAnswered(userChoice);
+				quiz.setAnswered(quiz.getAnswered() + 1);
+			}
+		}
+		
+		if (quiz.getAnswered() >= Const.QUIZ_CHOICE_VALUE) {
+			quiz.setState("finish");
+		}
+	}
+	
+	/* クイズゲーム終了時に、ランキングやユーザー情報を変更する処理 */
+	private void resultProcess() {
+		
+	}
 	
 }

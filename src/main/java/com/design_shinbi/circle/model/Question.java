@@ -17,7 +17,7 @@ public class Question {
 	private String choice4;
 	private List<String> choices;
 	private int correctIndex;
-	private String answered;
+	private int userAnswered;
 //	private Blob imagec;
 //	private Blob image2;
 //	private Blob image3;
@@ -32,6 +32,7 @@ public class Question {
 		this.choice4 = choice4;
 		this.choices = Arrays.asList(correct, choice2, choice3, choice4);
 		this.shuffle();
+		this.userAnswered = -1;
 		//this.imagec = imagec;
 		//this.image2 = image2;
 		//this.image3 = image3;
@@ -50,8 +51,19 @@ public class Question {
 		return choices;
 	}
 	
-	public void setAnswered(String answer) {
-		this.answered = answer;
+	public void setUserAnswered(String answerNumber) {
+		this.userAnswered = Integer.parseInt(answerNumber);
+	}
+	
+	public int getUserAnswered() {
+		return this.userAnswered;
+	}	
+	
+	public String getUserAnsweredText(int index) {
+		if (index < 0 || index > choices.size()) {
+			return "指定された選択肢が存在しません";
+		}
+		return this.getChoices().get(index);
 	}
 	
 	public void shuffle() {
@@ -59,7 +71,6 @@ public class Question {
 		this.correctIndex = choices.indexOf(correct);
 	}
 	
-	//ここを番号で正解かどうか識別できるように変更
 	public boolean isCorrect(int userChoice) {
 		if (userChoice > 3) {
 			return false;

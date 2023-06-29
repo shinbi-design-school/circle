@@ -52,7 +52,8 @@ public class LoginServlet extends HttpServlet{
 			} else {
 				HttpSession session = req.getSession();
 				session.setAttribute(Const.LOGIN_USER_KEY, user);
-				jsp = "/WEB-INF/jsp/loginTest.jsp";
+//				jsp = "/WEB-INF/jsp/loginTest.jsp";
+				jsp = "/WEB-INF/jsp/standby.jsp";
 			}
 			
 			RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);
