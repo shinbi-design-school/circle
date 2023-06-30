@@ -6,12 +6,17 @@ import java.util.List;
 
 import com.design_shinbi.circle.model.dao.RankingDAO;
 
+
+/*
+ * アプリケーションスコープで扱うこと
+ * 排他制御も使うこと
+ */
 public class Ranking {
 	private List<Quiz> scores;
 	private RankingDAO dao;
 	
-	public Ranking(RankingDAO dao){
-		
+	public Ranking(RankingDAO dao) throws SQLException{
+		this.init();
 	}
 	
 	public void init() throws SQLException {

@@ -47,10 +47,12 @@ public class RankingDAO {
 		return scores;
 	}
 	
+	//排他制御要る？
 	public void insertRecord(Quiz quiz) {
 		
 	}
 	
+	//排他制御要る？
 	private void deleteRecord() {
 		
 	}
