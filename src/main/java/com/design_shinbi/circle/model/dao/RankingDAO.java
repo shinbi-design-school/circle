@@ -28,13 +28,27 @@ public class RankingDAO {
 		List<Score> scores = new ArrayList<>();
 		
 		while(resultSet.next()) {
-			String userName = resultSet.getString("name");
-			scores.add(new Score());
+			Score score = new Score();
+			score.setUserId(resultSet.getInt("user_id"));
+			score.setTime(resultSet.getLong("time"));
+			score.setCorrectCount(resultSet.getInt("correctValue"));
+			score.setQuestionValue(resultSet.getInt("questionValue"));
+			score.setTimestamp(resultSet.getTimestamp("timestamp"));
+			
+			scores.add(score);
 		}
 		
 		resultSet.close();
 		statement.close();
 		
 		return scores;
+	}
+	
+	public void insertScore(Score score) {
+		
+	}
+	
+	public void にぶたん() {
+		
 	}
 }

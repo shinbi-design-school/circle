@@ -1,11 +1,9 @@
 SET SESSION FOREIGN_KEY_CHECKS=0;
 
-/* この部分はermファイルからエクスポート後に追加 */
-SET SQL_MODE = ALLOW_INVALID_DATES;
-
 /* Drop Tables */
 
 DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS ranking;
 DROP TABLE IF EXISTS result;
 DROP TABLE IF EXISTS users;
 
@@ -31,12 +29,24 @@ CREATE TABLE questions
 );
 
 
+CREATE TABLE ranking
+(
+	id int NOT NULL AUTO_INCREMENT,
+	user_id int NOT NULL,
+	correctValue int NOT NULL,
+	questionValue int NOT NULL,
+	time bigint NOT NULL,
+	created_at timestamp NOT NULL,
+	PRIMARY KEY (id)
+);
+
+
 CREATE TABLE result
 (
 	id int NOT NULL AUTO_INCREMENT,
 	user_id int NOT NULL,
 	score int NOT NULL,
-	created_at time NOT NULL,
+	created_at timestamp NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -58,6 +68,14 @@ CREATE TABLE users
 
 
 /* Create Foreign Keys */
+
+ALTER TABLE ranking
+	ADD FOREIGN KEY (user_id)
+	REFERENCES users (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
 
 ALTER TABLE result
 	ADD FOREIGN KEY (user_id)
