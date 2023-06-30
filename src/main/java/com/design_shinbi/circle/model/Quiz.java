@@ -116,6 +116,10 @@ public class Quiz {
 		return startTime;
 	}
 	
+	public long getElapsedTime() {
+		return Duration.between(startTime, finishTime).toMillis();
+	}
+	
 	public int getElapsedSeconds() {
 		long tmp = Duration.between(startTime, finishTime).toSeconds();
 		int result = tmp < Integer.MAX_VALUE ? (int)tmp : Integer.MAX_VALUE ;
