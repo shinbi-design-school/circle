@@ -80,7 +80,7 @@ html {
     padding: 5px 0;
 }
 .login-page-container th::after {
-    content: ':';
+    content: '：';
 }
 .login-page-container input {
     padding: 10px;
