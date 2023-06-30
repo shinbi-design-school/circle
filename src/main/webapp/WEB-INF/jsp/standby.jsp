@@ -16,7 +16,7 @@
         <h1 class="quiz-title">circle</h1>
             <h2 class="quiz-subtitle">【3G】のクイズゲーム</h2>
                 <h3>
-                    <a href="/play.jsp" class="quiz-start-button">スタート</a>
+                    <a href="/start.jsp" class="quiz-start-button">スタート</a>
                 </h3>
     </div>
 </body>
