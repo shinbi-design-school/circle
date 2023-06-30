@@ -2,6 +2,7 @@
 
 html {
     font-family: 'Anton', sans-serif;
+    height: 100%;
 }
 .standby-page-container {
     text-align: center;
@@ -98,5 +99,6 @@ html {
     outline: none;
     background-color: #0af;
     color: #fff;
+    width: 100%;
 }
 
