@@ -45,6 +45,7 @@ public class Quiz {
 
 	public void finish() {
 		this.setFinishTime(LocalDateTime.now());
+		this.setState("finish");
 	}
 	
 	public List<Question> getQuestions(){
@@ -128,7 +129,5 @@ public class Quiz {
 	public Question pick() {
 		return questions.get(this.getAnswered());
 	}
-	
-	
 	
 }
