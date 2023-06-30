@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@charset "UTF-8";
 
 html {
     font-family: 'Anton', sans-serif;
@@ -43,6 +42,15 @@ html {
 
 
 /*-----login.jsp-----*/
+.login-page {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #eee;
+    height: 100%;
+}
 
 .login-page-container {
     display: flex;
