@@ -1,1 +1,42 @@
 @charset "UTF-8";
+@charset "UTF-8";
+
+html {
+    font-family: 'Anton', sans-serif;
+}
+.container {
+    text-align: center;
+}
+.quiz-title {
+    margin: 0;
+    font-size: 150px;
+}
+.quiz-subtitle {
+    position: relative;
+    display: inline-block;
+    padding: 0 55px;
+    margin: 0;
+}
+.quiz-subtitle:before,
+.quiz-subtitle:after {
+    content: "";
+    position: absolute;
+    top: 40%;
+    display: inline-block;
+    width: 50px;
+    height: 5px;
+    background-color: black;
+}
+
+.quiz-subtitle:before {
+    left: 0;
+}
+
+.quiz-subtitle:after {
+    right: 0;
+}
+.quiz-start-button {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+}
