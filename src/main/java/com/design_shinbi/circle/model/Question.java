@@ -52,7 +52,9 @@ public class Question {
 	}
 	
 	public void setUserAnswered(String answerNumber) {
-		this.userAnswered = Integer.parseInt(answerNumber);
+		if (this.getUserAnswered() == -1) {			
+			this.userAnswered = Integer.parseInt(answerNumber);
+		}
 	}
 	
 	public int getUserAnswered() {

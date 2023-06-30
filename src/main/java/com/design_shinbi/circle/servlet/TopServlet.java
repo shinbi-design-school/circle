@@ -25,7 +25,7 @@ public class TopServlet extends HttpServlet {
 		if(user == null) {
 			jsp = "/WEB-INF/jsp/login.jsp";
 		} else {
-			jsp = "/WEB-INF/jsp/loginTest.jsp";
+			jsp = "/WEB-INF/jsp/standby.jsp";
 		}
 		
 		try {
