@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.design_shinbi.circle.model.entity.Score;
+import com.design_shinbi.circle.model.Quiz;
 
 public class RankingDAO {
 	protected Connection connection;
@@ -18,20 +18,21 @@ public class RankingDAO {
 		this.connection = connection;
 	}
 	
-	public List<Score> getHigher() throws SQLException {
+	public List<Quiz> getRecords() throws SQLException {
 		String sql = "select users.name, result.score, result.created_at from result inner join users LIMIT ?";
 		
 		PreparedStatement statement = this.connection.prepareStatement(sql);
 		statement.setInt(1, HIGHER);
 		ResultSet resultSet = statement.executeQuery();
 		
-		List<Score> scores = new ArrayList<>();
+		List<Quiz> scores = new ArrayList<>();
 		
 		while(resultSet.next()) {
-			Score score = new Score();
+			Quiz score = new Quiz();
+			score.setId(resultSet.getInt("id"));
 			score.setUserId(resultSet.getInt("user_id"));
 			score.setTime(resultSet.getLong("time"));
-			score.setCorrectCount(resultSet.getInt("correctValue"));
+			score.setCorrectValue(resultSet.getInt("correctValue"));
 			score.setQuestionValue(resultSet.getInt("questionValue"));
 			score.setTimestamp(resultSet.getTimestamp("timestamp"));
 			
@@ -44,11 +45,15 @@ public class RankingDAO {
 		return scores;
 	}
 	
-	public void insertScore(Score score) {
+	public void insertRecord(Quiz quiz) {
 		
 	}
 	
-	public void にぶたん() {
+	private void にぶたん() {
+		
+	}
+	
+	private void deleteRecord() {
 		
 	}
 }

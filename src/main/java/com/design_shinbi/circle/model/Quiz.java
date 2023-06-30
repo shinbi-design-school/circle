@@ -7,7 +7,12 @@ import java.util.List;
 
 import com.design_shinbi.circle.model.dao.QuizDAO;
 
-public class Quiz {
+public class Quiz implements Comparable<Quiz>{
+	//レコード向けフィールド
+	private int id;
+	private int userId;
+	
+	//セッション向けフィールド
 	private List<Question> questions;
 	private int correctCount;
 	private QuizDAO dao;
@@ -26,7 +31,10 @@ public class Quiz {
 	private int answered;
 	private LocalDateTime startTime;
 	private LocalDateTime finishTime;
-		
+	
+	public Quiz() {
+	}
+	
 	public Quiz(QuizDAO dao) throws SQLException {
 		this.dao = dao;
 		this.init();
@@ -48,6 +56,14 @@ public class Quiz {
 		this.setState("finish");
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public List<Question> getQuestions(){
 		return this.questions;
 	}
@@ -132,6 +148,25 @@ public class Quiz {
 	
 	public Question pick() {
 		return questions.get(this.getAnswered());
+	}
+	
+	public int calcScore() {
+		int result = 0;
+		if (this.getElapsedTime() < 30000) {
+			
+		} else if (this.getElapsedTime() < 60000 ) {
+			
+		} else if(this.getElapsedTime() < 120000) {
+			
+		} else {
+			
+		}
+		return result;
+	}
+	
+	@Override
+	public int compareTo(Quiz o) {
+		return 0;
 	}
 	
 }
