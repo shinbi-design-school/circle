@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +29,16 @@ public class RankingDAO {
 		List<Quiz> scores = new ArrayList<>();
 		
 		while(resultSet.next()) {
-			Quiz score = new Quiz();
-			score.setId(resultSet.getInt("id"));
-			score.setUserId(resultSet.getInt("user_id"));
-			score.setTime(resultSet.getLong("time"));
-			score.setCorrectValue(resultSet.getInt("correctValue"));
-			score.setQuestionValue(resultSet.getInt("questionValue"));
-			score.setTimestamp(resultSet.getTimestamp("timestamp"));
+			Quiz quiz = new Quiz();
+			quiz.setId(resultSet.getInt("id"));
+			quiz.setUserId(resultSet.getInt("user_id"));
+			quiz.setFinishTime(resultSet.getTimestamp("timestamp").toLocalDateTime());
+			Duration tmp = Duration.ofMillis(resultSet.getLong("time"));
+			quiz.setStartTime(quiz.getFinishTime().minus(tmp));
+			quiz.setCorrectCount(resultSet.getInt("correctValue"));
+			quiz.setQuestionsValue(resultSet.getInt("questionValue"));
 			
-			scores.add(score);
+			scores.add(quiz);
 		}
 		
 		resultSet.close();
@@ -46,10 +48,6 @@ public class RankingDAO {
 	}
 	
 	public void insertRecord(Quiz quiz) {
-		
-	}
-	
-	private void にぶたん() {
 		
 	}
 	

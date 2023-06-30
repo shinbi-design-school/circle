@@ -21,4 +21,8 @@ public class Ranking {
 	public void sort() {
 		Collections.sort(scores);
 	}
+	
+	private void にぶたん() {
+		
+	}
 }

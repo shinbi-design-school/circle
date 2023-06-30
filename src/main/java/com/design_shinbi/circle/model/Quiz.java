@@ -33,6 +33,7 @@ public class Quiz implements Comparable<Quiz>{
 	private LocalDateTime finishTime;
 	
 	public Quiz() {
+		this.questionsValue = 0;
 	}
 	
 	public Quiz(QuizDAO dao) throws SQLException {
@@ -64,6 +65,14 @@ public class Quiz implements Comparable<Quiz>{
 		this.id = id;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	public List<Question> getQuestions(){
 		return this.questions;
 	}
@@ -78,6 +87,12 @@ public class Quiz implements Comparable<Quiz>{
 	
 	public int getQuestionsValue() {
 		return this.questionsValue;
+	}
+	
+	public void setQuestionsValue(int questionsValue) {
+		if(this.questionsValue == 0) {
+			this.questionsValue = questionsValue;
+		}
 	}
 	
 	public void chkState() {
@@ -132,6 +147,10 @@ public class Quiz implements Comparable<Quiz>{
 		return startTime;
 	}
 	
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
+	}
+	
 	public long getElapsedTime() {
 		return Duration.between(startTime, finishTime).toMillis();
 	}
@@ -151,21 +170,42 @@ public class Quiz implements Comparable<Quiz>{
 	}
 	
 	public int calcScore() {
-		int result = 0;
+		double result = 0;
+		
+		result += getCorrectCount() * 20;
+		
 		if (this.getElapsedTime() < 30000) {
-			
+			result += 55;
 		} else if (this.getElapsedTime() < 60000 ) {
-			
+			result += 50;
 		} else if(this.getElapsedTime() < 120000) {
-			
+			result += 30;
 		} else {
-			
+			result += 10;
 		}
-		return result;
+		
+		if (this.getCorrectRate() >= 1.0) {
+			result *= 2;
+		} else if (this.getCorrectRate() >= 0.7) {
+			result *= 1.7;
+		} else if (this.getCorrectRate() == 0.5) {
+			result *= 1.5;
+		} else {
+			result *= 0.5;
+		}
+		
+		return (int)result;
 	}
 	
 	@Override
 	public int compareTo(Quiz o) {
+		int self = this.calcScore();
+		int someone = o.calcScore(); 
+		if (self > someone){
+			return 1;
+		} else if ( self < someone) {
+			return -1;
+		}
 		return 0;
 	}
 	
