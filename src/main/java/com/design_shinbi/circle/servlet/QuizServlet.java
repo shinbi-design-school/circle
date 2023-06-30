@@ -1,6 +1,7 @@
 package com.design_shinbi.circle.servlet;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.design_shinbi.circle.model.Const;
 import com.design_shinbi.circle.model.Quiz;
 
 @WebServlet("/play")
@@ -20,6 +20,8 @@ public class QuizServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String jsp = null;
 		HttpSession session = req.getSession();
+		//ログインしているかどうかの分岐処理を追加すること
+		
 		Quiz quiz = (Quiz)session.getAttribute("quiz");
 						
 		if (quiz != null) {
@@ -32,8 +34,10 @@ public class QuizServlet extends HttpServlet{
 				playProcess(quiz, req);
 				jsp = "/WEB-INF/jsp/play.jsp";
 				
-			} else if(quiz.getState().equals("finish")) {
-				resultProcess();
+			}
+			
+			if(quiz.getState().equals("finish")) {
+				resultProcess(quiz);
 				jsp = "/WEB-INF/jsp/result.jsp";
 			}
 		} else {
@@ -44,24 +48,30 @@ public class QuizServlet extends HttpServlet{
 		dispatcher.forward(req, resp);
 	}
 	
-	/* プレイ中の処理 */
+	/* プレイ中の処理
+	 * 複数ウィンドウや強制POSTですでに答えた内容に答えようとした時の処理に不備あり？
+	 * 
+	 */
 	private void playProcess(Quiz quiz, HttpServletRequest req) {
 		String userChoice = req.getParameter("userChoice"); 
 		if (userChoice != null) {
 			if (quiz.pick().getUserAnswered() == -1) {
 				quiz.pick().setUserAnswered(userChoice);
+				if (quiz.pick().isCorrect(userChoice)) {
+					quiz.setCorrectCount(quiz.getCorrectCount() + 1);
+				}
 				quiz.setAnswered(quiz.getAnswered() + 1);
 			}
 		}
 		
-		if (quiz.getAnswered() >= Const.QUIZ_CHOICE_VALUE) {
+		if (quiz.getAnswered() >= quiz.getQuestionsValue()) {
 			quiz.setState("finish");
 		}
 	}
 	
 	/* クイズゲーム終了時に、ランキングやユーザー情報を変更する処理 */
-	private void resultProcess() {
-		
+	private void resultProcess(Quiz quiz) {
+		quiz.setFinishTime(LocalDateTime.now());
 	}
 	
 }
