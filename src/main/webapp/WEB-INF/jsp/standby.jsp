@@ -12,7 +12,7 @@
     <title>待機ページ</title>
 </head>
 <body>
-    <div class="container">
+    <div class="standby-page-container">
         <h1 class="quiz-title">circle</h1>
             <h2 class="quiz-subtitle">【3G】のクイズゲーム</h2>
                 <h3>

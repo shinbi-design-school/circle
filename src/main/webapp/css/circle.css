@@ -4,7 +4,7 @@
 html {
     font-family: 'Anton', sans-serif;
 }
-.container {
+.standby-page-container {
     text-align: center;
 }
 .quiz-title {
@@ -40,3 +40,54 @@ html {
     text-decoration: none;
     color: black;
 }
+
+/*-----login.jsp-----*/
+
+.login-page-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 25px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 5px #ccc;
+}
+.login-page-container h1 {
+    margin: 10px;
+    text-align: center;
+    font-weight: normal;
+}
+.login-page-container table {
+    margin-bottom: 10px;
+    border-collapse: collapse;
+}
+.login-page-container th {
+    padding: 5px 0;
+    padding-right: 15px;
+    text-align: right;
+}
+.login-page-container td {
+    padding: 5px 0;
+}
+.login-page-container th::after {
+    content: ':';
+}
+.login-page-container input {
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    outline: none;
+}
+.login-page-container input:focus {
+    border-color: #0af;
+}
+#submit {
+    align-self: flex-end;
+    padding: 5px 10px;
+    border: 1px solid #0af;
+    border-radius: 5px;
+    outline: none;
+    background-color: #0af;
+    color: #fff;
+}
+
