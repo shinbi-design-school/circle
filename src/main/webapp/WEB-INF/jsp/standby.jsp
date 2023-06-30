@@ -14,7 +14,7 @@
 <body>
     <div class="standby-page-container">
         <h1 class="quiz-title">circle</h1>
-            <h2 class="quiz-subtitle">【3G】のクイズゲーム</h2>
+            <h2 class="quiz-subtitle">【３Ｇ】のクイズゲーム</h2>
                 <h3>
                     <a href="/start.jsp" class="quiz-start-button">スタート</a>
                 </h3>
