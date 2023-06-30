@@ -1,7 +1,6 @@
 package com.design_shinbi.circle.servlet;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.design_shinbi.circle.model.Const;
 import com.design_shinbi.circle.model.Quiz;
+import com.design_shinbi.circle.model.entity.User;
 
 @WebServlet("/play")
 public class QuizServlet extends HttpServlet{
@@ -20,7 +21,16 @@ public class QuizServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String jsp = null;
 		HttpSession session = req.getSession();
-		//ログインしているかどうかの分岐処理を追加すること
+		
+		//ログインしているかどうかの分岐処理
+		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
+		if (loginUser == null) {
+			jsp = "top";
+			RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);
+			dispatcher.forward(req, resp);
+			return;
+		}
+		
 		
 		Quiz quiz = (Quiz)session.getAttribute("quiz");
 						
@@ -50,7 +60,6 @@ public class QuizServlet extends HttpServlet{
 	
 	/* プレイ中の処理
 	 * 複数ウィンドウや強制POSTですでに答えた内容に答えようとした時の処理に不備あり？
-	 * 
 	 */
 	private void playProcess(Quiz quiz, HttpServletRequest req) {
 		String userChoice = req.getParameter("userChoice"); 
@@ -71,7 +80,7 @@ public class QuizServlet extends HttpServlet{
 	
 	/* クイズゲーム終了時に、ランキングやユーザー情報を変更する処理 */
 	private void resultProcess(Quiz quiz) {
-		quiz.setFinishTime(LocalDateTime.now());
+		quiz.finish();
 	}
 	
 }
