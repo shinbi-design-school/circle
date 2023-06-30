@@ -10,6 +10,17 @@ public class Quiz {
 	private List<Question> questions;
 	private int correctCount;
 	private QuizDAO dao;
+	private int questionsValue;
+	
+	/*
+	 * state変数
+	 * Quizが待機中か、進行中か、終了済みか表す変数
+	 * standby	:待機中
+	 * playing	:進行中
+	 * finish	:終了済み
+	 * 
+	 * 列挙型か定数を使うべき？
+	 */
 	private String state;
 	private int answered;
 	private LocalDateTime startTime;
@@ -28,6 +39,7 @@ public class Quiz {
 		this.answered = 0;
 		this.state = "standby";
 		this.startTime = LocalDateTime.now();
+		this.questionsValue = Const.QUIZ_CHOICE_VALUE;
 	}
 	
 	public String getState() {
@@ -38,8 +50,12 @@ public class Quiz {
 		this.state = state;
 	}
 	
+	public int getQuestionsValue() {
+		return this.questionsValue;
+	}
+	
 	public void chkState() {
-		if (this.getAnswered() >= Const.QUIZ_CHOICE_VALUE) {
+		if (this.getAnswered() >= this.questionsValue) {
 			if (this.getState().equals("playing")) {
 				this.setState("finish");
 			} else {
@@ -64,13 +80,18 @@ public class Quiz {
 	public void setAnswered(int answered) {
 		this.answered = answered;
 	}
+	
+	public void setCorrectCount(int cnt) {
+		this.correctCount = cnt;
+	}
 
 	public int getCorrectCount() {
 		return correctCount;
 	}
 	
 	public double getCorrectRate() {
-		return getCorrectCount() / questions.size(); 
+		double result = (double)getCorrectCount() / (double)questions.size(); 
+		return result;
 	}
 		
 	public LocalDateTime getFinishTime() {

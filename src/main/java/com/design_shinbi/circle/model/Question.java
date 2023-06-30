@@ -75,6 +75,18 @@ public class Question {
 		this.correctIndex = choices.indexOf(correct);
 	}
 	
+	public boolean isCorrect(String userChoice) {
+		try {
+			Integer tmp = Integer.parseInt(userChoice);
+			return isCorrect((int)tmp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+		
+	}
+	
 	public boolean isCorrect(int userChoice) {
 		if (userChoice > 3) {
 			return false;

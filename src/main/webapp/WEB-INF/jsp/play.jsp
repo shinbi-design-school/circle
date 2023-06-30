@@ -9,6 +9,7 @@
 	Quiz quiz = (Quiz)session.getAttribute("quiz");
 	Question question = (Question)session.getAttribute("question");
 	List<String> choices = question.getChoices();
+	int qNum = question.getUserAnswered() == -1 ? quiz.getAnswered() + 1 : quiz.getAnswered();
 %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
     <div id="wrapper">
         <main class="quiz">
             <div class="inner-block">
-                <h1 class="quiz-question-number">問題<%=quiz.getAnswered() + 1 %></h1>
+                <h1 class="quiz-question-number">問題<%=qNum %></h1>
                 <h2 class="quiz-question"><%=question.getSentence() %></h2>
 <%
 	if (question.getUserAnswered() == -1){
