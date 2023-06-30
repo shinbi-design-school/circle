@@ -1,6 +1,7 @@
 package com.design_shinbi.circle.model;
 
 import java.sql.SQLException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -40,6 +41,14 @@ public class Quiz {
 		this.state = "standby";
 		this.startTime = LocalDateTime.now();
 		this.questionsValue = Const.QUIZ_CHOICE_VALUE;
+	}
+
+	public void finish() {
+		this.setFinishTime(LocalDateTime.now());
+	}
+	
+	public List<Question> getQuestions(){
+		return this.questions;
 	}
 	
 	public String getState() {
@@ -105,6 +114,12 @@ public class Quiz {
 	public LocalDateTime getStartTime() {
 		return startTime;
 	}
+	
+	public int getElapsedSeconds() {
+		long tmp = Duration.between(startTime, finishTime).toSeconds();
+		int result = tmp < Integer.MAX_VALUE ? (int)tmp : Integer.MAX_VALUE ;
+		return result;
+	}
 
 	public void setQuestions() throws SQLException {
 		this.questions = this.dao.choiceQuestions();
@@ -113,4 +128,7 @@ public class Quiz {
 	public Question pick() {
 		return questions.get(this.getAnswered());
 	}
+	
+	
+	
 }

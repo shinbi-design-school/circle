@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.design_shinbi.circle.model.Quiz" %>
+<%@ page import="com.design_shinbi.circle.model.Question" %>
 <%@ page import="java.util.List" %>
 
 <%
@@ -21,7 +22,22 @@
 		<p><%=quiz.getQuestionsValue() %>問中</p>
 		<p><%=quiz.getCorrectCount() %>問正解しました。</p>
 		<p>正解率は<%=correctRate %>%です</p>
-	</div>	
+		<p><%=quiz.getElapsedSeconds()%>秒かかりました。</p>
+		<p>履歴</p>
+		<table>
+<%
+	for (Question question : quiz.getQuestions()){
+%>
+			<tr>
+				<th><%=question.getSentence() %></th>
+<% String hasCorrect = question.hasCorrect() ? "○" : "×"; %>
+				<td><%=hasCorrect %></td>
+			</tr>
+<%
+	}
+%>
+		</table>
+	</div>
 	
 	<a href="./mypage">ユーザーページへ</a>
 	<a href="./top">もう一度プレイ</a>

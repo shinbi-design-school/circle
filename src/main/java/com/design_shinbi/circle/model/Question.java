@@ -95,6 +95,10 @@ public class Question {
 		return userChoice == this.correctIndex;
 	}
 
+	public boolean hasCorrect() {
+		return isCorrect(getUserAnswered());
+	}
+	
 	public static Question createQuestion(String sentence, String genre, String correct, String choice2,
 			String choice3, String choice4) {
 		Question question = new Question(sentence, genre, correct, choice2, choice3, choice4);
