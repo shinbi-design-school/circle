@@ -53,21 +53,28 @@ public class RankingDAO {
 	}
 	
 	public synchronized int insertRecord(Quiz quiz) throws SQLException {
+		if(this.connection.isClosed()){
+			System.out.println("データベースとの接続が切れています");
+		}
+
 		int generatedId = 0;
-		String sql = "INSERT INTO ranking ('user_id', 'correctValue', 'questionValue', 'time', 'created_at') VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO ranking (`user_id`, `correctValue`, `questionValue`, `time`, `created_at`) VALUES (?, ?, ?, ?, ?)";
 
 		PreparedStatement statement = this.connection.prepareStatement(sql);
 		statement.setInt(1, quiz.getUserId());
 		statement.setInt(2, quiz.getCorrectCount());
 		statement.setInt(3, quiz.getQuestionsValue());
-		statement.setLong(4, Duration.between(quiz.getFinishTime(), quiz.getStartTime()).toMillis());
+		statement.setLong(4, Duration.between( quiz.getStartTime(), quiz.getFinishTime() ).toMillis());
 		statement.setTimestamp(5, Timestamp.valueOf(quiz.getFinishTime()));
-		statement.executeUpdate();
+		statement.executeLargeUpdate();
 		ResultSet resultSet = statement.getGeneratedKeys();
 	
 		if (resultSet.next()) {
 			generatedId = resultSet.getInt("id");
 		}
+		
+		resultSet.close();
+		statement.close();
 		
 		return generatedId;
 		
@@ -79,5 +86,8 @@ public class RankingDAO {
 		PreparedStatement statement = this.connection.prepareStatement(sql);
 		statement.setInt(1, index);
 		statement.executeUpdate();
+
+		statement.close();
 	}
+
 }

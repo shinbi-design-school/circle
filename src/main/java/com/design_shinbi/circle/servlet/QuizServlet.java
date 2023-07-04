@@ -1,8 +1,10 @@
 package com.design_shinbi.circle.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.design_shinbi.circle.model.Const;
 import com.design_shinbi.circle.model.Quiz;
+import com.design_shinbi.circle.model.Ranking;
 import com.design_shinbi.circle.model.entity.User;
 
 @WebServlet("/play")
@@ -46,7 +49,11 @@ public class QuizServlet extends HttpServlet{
 			}
 			
 			if(quiz.getState().equals("finish")) {
-				resultProcess(quiz);
+				try {
+					resultProcess(quiz);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 				jsp = "/WEB-INF/jsp/result.jsp";
 			}
 		} else {
@@ -78,8 +85,11 @@ public class QuizServlet extends HttpServlet{
 	}
 	
 	/* クイズゲーム終了時に、ランキングやユーザー情報を変更する処理 */
-	private void resultProcess(Quiz quiz) {
+	private void resultProcess(Quiz quiz) throws SQLException {
 		quiz.finish();
+		ServletContext application = this.getServletContext();
+		Ranking ranking = (Ranking)application.getAttribute("ranking");
+		ranking.insertScore(quiz);
 	}
 	
 }

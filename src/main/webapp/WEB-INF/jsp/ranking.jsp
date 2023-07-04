@@ -3,13 +3,12 @@
 
 <%@ page import="com.design_shinbi.circle.model.Ranking" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.design_shinbi.circle.Quiz" %>
+<%@ page import="javax.servlet.ServletContext" %>
+<%@ page import="com.design_shinbi.circle.model.Quiz" %>
 
 <%
-	ServletContext application = this.getServletContext();
 	Ranking ranking = (Ranking)application.getAttribute("ranking");
 	List<Quiz> scores = ranking.getScores();
-	int viewValue = 10;
 %>
 
 <!DOCTYPE html>
@@ -21,11 +20,11 @@
 <body>
 	<table>
 <%
-	for (int i = 0; i < viewValue; i++)){
+	for (Quiz quiz : scores){
 %>
 		<tr>
-			<th><%=scores.get(i).getUserName() %></th>
-			<td><%=scores.get(i).calcScore() %></td>
+			<th><%=quiz.getUserName() %></th>
+			<td><%=quiz.calcScore() %></td>
 		</tr>
 <%
 	}

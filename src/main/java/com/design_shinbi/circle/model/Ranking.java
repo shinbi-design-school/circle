@@ -79,7 +79,7 @@ public class Ranking {
 				this.init();
 			}
 		} else {
-			try {
+			try {		
 				if (oldScore.calcScore() < quiz.calcScore() ) {
 					this.scores.add(rank, quiz);
 					int generatedId = this.rankingDao.insertRecord(quiz);

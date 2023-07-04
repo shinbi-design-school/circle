@@ -27,7 +27,8 @@ public class RankingServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		ServletContext application = this.getServletContext();
-		try (Connection connection = DbUtil.connect()){
+		try {
+			Connection connection = DbUtil.connect();
 			RankingDAO rankingDao = new RankingDAO(connection);
 			UserDAO userDao = new UserDAO(connection);
 			Ranking ranking = new Ranking(rankingDao, userDao);
