@@ -1,5 +1,5 @@
 SET SESSION FOREIGN_KEY_CHECKS=0;
-SET SET sql_mode = ALLOW_INVALID_DATES;
+SET sql_mode = ALLOW_INVALID_DATES;
 
 /* Drop Tables */
 
@@ -7,9 +7,6 @@ DROP TABLE IF EXISTS questions;
 DROP TABLE IF EXISTS ranking;
 DROP TABLE IF EXISTS result;
 DROP TABLE IF EXISTS users;
-
-
-
 
 /* Create Tables */
 
@@ -37,7 +34,7 @@ CREATE TABLE ranking
 	correctValue int NOT NULL,
 	questionValue int NOT NULL,
 	time bigint NOT NULL,
-	created_at timestamp NOT NULL,
+	created_at timestamp(3) NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -47,7 +44,7 @@ CREATE TABLE result
 	id int NOT NULL AUTO_INCREMENT,
 	user_id int NOT NULL,
 	score int NOT NULL,
-	created_at timestamp NOT NULL,
+	created_at timestamp(3) NOT NULL,
 	PRIMARY KEY (id)
 );
 

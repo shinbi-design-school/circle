@@ -5,12 +5,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.design_shinbi.circle.model.Quiz;
 
+
+/*
+ * ERMasterだとtimestamp型でミリ秒を扱うことができないので、エクスポートしてからtimestampをtimestamp(3)に変更すること。
+ */
 public class RankingDAO {
 	protected Connection connection;
 	
@@ -19,7 +24,8 @@ public class RankingDAO {
 	}
 	
 	public List<Quiz> getRecords() throws SQLException {
-		String sql = "select * from ranking";
+		String sql = "select ranking.id, ranking.user_id, ranking.created_at, ranking.time, ranking.correctValue,"
+				+ " ranking.questionValue, users.name from ranking inner join users on users.id = ranking.user_id";
 		
 		PreparedStatement statement = this.connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
@@ -30,11 +36,12 @@ public class RankingDAO {
 			Quiz quiz = new Quiz();
 			quiz.setId(resultSet.getInt("id"));
 			quiz.setUserId(resultSet.getInt("user_id"));
-			quiz.setStartTime(resultSet.getTimestamp("created_at").toLocalDateTime());
+			quiz.setFinishTime(resultSet.getTimestamp("created_at").toLocalDateTime());
 			Duration tmp = Duration.ofMillis(resultSet.getLong("time"));
-			quiz.setFinishTime(quiz.getStartTime().plus(tmp));
+			quiz.setStartTime(quiz.getFinishTime().minus(tmp));
 			quiz.setCorrectCount(resultSet.getInt("correctValue"));
 			quiz.setQuestionsValue(resultSet.getInt("questionValue"));
+			quiz.setUserName(resultSet.getString("name"));
 			
 			scores.add(quiz);
 		}
@@ -45,12 +52,32 @@ public class RankingDAO {
 		return scores;
 	}
 	
-	//排他制御要る？
-	public void insertRecord(Quiz quiz) {
+	public synchronized int insertRecord(Quiz quiz) throws SQLException {
+		int generatedId = 0;
+		String sql = "INSERT INTO ranking ('user_id', 'correctValue', 'questionValue', 'time', 'created_at') VALUES (?, ?, ?, ?, ?)";
+
+		PreparedStatement statement = this.connection.prepareStatement(sql);
+		statement.setInt(1, quiz.getUserId());
+		statement.setInt(2, quiz.getCorrectCount());
+		statement.setInt(3, quiz.getQuestionsValue());
+		statement.setLong(4, Duration.between(quiz.getFinishTime(), quiz.getStartTime()).toMillis());
+		statement.setTimestamp(5, Timestamp.valueOf(quiz.getFinishTime()));
+		statement.executeUpdate();
+		ResultSet resultSet = statement.getGeneratedKeys();
+	
+		if (resultSet.next()) {
+			generatedId = resultSet.getInt("id");
+		}
+		
+		return generatedId;
 		
 	}
 	
-	//排他制御要る？
-	private void deleteBottomRecord() {
+	public synchronized void deleteRecord(int index) throws SQLException {
+		String sql = "DELETE FROM ranking where id = ?";
+		
+		PreparedStatement statement = this.connection.prepareStatement(sql);
+		statement.setInt(1, index);
+		statement.executeUpdate();
 	}
 }

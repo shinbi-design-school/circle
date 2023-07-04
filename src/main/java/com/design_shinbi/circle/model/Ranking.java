@@ -25,9 +25,6 @@ public class Ranking {
 	
 	public void init() throws SQLException {
 		this.scores = rankingDao.getRecords();
-		for (Quiz quiz : this.scores) {
-			quiz.setUserName( userDao.findUserNameById(quiz.getUserId()) );
-		}
 		this.sort();
 	}
 	
@@ -43,16 +40,58 @@ public class Ranking {
 		return userDao;
 	}
 	
-	public synchronized void insertScore(Quiz quiz) {
-		//二部探索でquizを挿入する位置を求める
-		//もしランキング外だったら早期return
-		//ランキング外でなかったらその位置に挿入する
-			//おなじIDが登録されていなかったら最後尾を取り除く
-			//おなじIDが登録されていたらスコアが低い方のレコードを取り除く
+	public Quiz sameIdQuiz(int id) {
+		for (Quiz quiz : scores) {
+			if (quiz.getUserId() == id) {
+				return quiz;
+			}
+		}
+		return null;
+	}
+	
+	public synchronized void insertScore(Quiz quiz) throws SQLException {
+		//とりあえずソートしておく。
+		//this.sort();
 
-		System.out.println(quiz.calcScore());
-		int i = Collections.binarySearch(scores, quiz);
-		System.out.println(i);
+		//二部探索でquizを挿入する位置を求める
+		int rank = Collections.binarySearch(scores, quiz);
+		rank = Math.abs(rank);
+		rank -= 1;
+		
+		//もしランキング外だったら早期return
+		if (rank >= Const.RANKING_SIZE_MAX) {
+			return;
+		}
+		
+		//同じユーザーがいなかったらそのまま挿入
+		//同じユーザーがいた場合、古いレコードの方がスコアが低かったら挿入して、低い方を削除する。
+		Quiz oldScore = sameIdQuiz(quiz.getUserId());
+		if (oldScore == null) {
+			try {		
+				this.scores.add(rank, quiz);
+				int generatedId = this.rankingDao.insertRecord(quiz);
+				quiz.setId(generatedId);
+				if (scores.size() > Const.RANKING_SIZE_MAX) {
+					this.rankingDao.deleteRecord( scores.remove(scores.size() - 1).getId() );
+				}
+				
+			} catch (Exception e) {
+				this.init();
+			}
+		} else {
+			try {
+				if (oldScore.calcScore() < quiz.calcScore() ) {
+					this.scores.add(rank, quiz);
+					int generatedId = this.rankingDao.insertRecord(quiz);
+					quiz.setId(generatedId);
+					scores.remove(oldScore);
+					this.rankingDao.deleteRecord( oldScore.getId() );
+				}				
+			} catch (Exception e) {
+				this.init();
+			}
+		}
+
 	}
 
 }
