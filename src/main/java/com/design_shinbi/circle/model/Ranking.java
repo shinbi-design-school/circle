@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.design_shinbi.circle.model.dao.RankingDAO;
+import com.design_shinbi.circle.model.dao.UserDAO;
 
 
 /*
@@ -13,14 +14,15 @@ import com.design_shinbi.circle.model.dao.RankingDAO;
  */
 public class Ranking {
 	private List<Quiz> scores;
-	private RankingDAO dao;
+	private RankingDAO rankingDao;
+	private UserDAO userDao;
 	
-	public Ranking(RankingDAO dao) throws SQLException{
+	public Ranking(RankingDAO rankingDao, UserDAO userDao) throws SQLException{
 		this.init();
 	}
 	
 	public void init() throws SQLException {
-		this.scores = dao.getRecords();
+		this.scores = rankingDao.getRecords();
 		this.sort();
 	}
 	
@@ -35,4 +37,9 @@ public class Ranking {
 	public List<Quiz> getScores() {
 		return scores;
 	}
+	
+	public UserDAO userDao() {
+		return userDao;
+	}
+
 }

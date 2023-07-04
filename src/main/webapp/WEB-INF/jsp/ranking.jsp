@@ -20,10 +20,12 @@
 	<table>
 <%
 	for (Quiz quiz : scores){
+		//データベースのアクセスが増えすぎるので訂正必須
+		String name = Ranking.userDao().findUserNameById(quiz.getUserId());
 %>
 		<tr>
-			<th></th>
-			<td></td>
+			<th><%=name %></th>
+			<td><%=quiz.calcScore() %></td>
 		</tr>
 <%
 	}

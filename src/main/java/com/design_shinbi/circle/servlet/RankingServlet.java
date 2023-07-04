@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.design_shinbi.circle.model.Ranking;
 import com.design_shinbi.circle.model.dao.RankingDAO;
+import com.design_shinbi.circle.model.dao.UserDAO;
 import com.design_shinbi.circle.util.DbUtil;
 
 @WebServlet("/ranking")
@@ -24,8 +25,9 @@ public class RankingServlet extends HttpServlet {
 		super.init(config);
 		ServletContext application = this.getServletContext();
 		try (Connection connection = DbUtil.connect()){
-			RankingDAO dao = new RankingDAO(connection);
-			Ranking ranking = new Ranking(dao);
+			RankingDAO rankingDao = new RankingDAO(connection);
+			UserDAO userDao = new UserDAO(connection);
+			Ranking ranking = new Ranking(rankingDao, userDao);
 			application.setAttribute("ranking", ranking);
 		} catch (Exception e) {
 			e.printStackTrace();

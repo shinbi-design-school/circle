@@ -72,11 +72,6 @@ public class Quiz implements Comparable<Quiz>{
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
-	//idからユーザー名を取得する
-//	public String getUserName() {
-//		return ;
-//	}
 
 	public List<Question> getQuestions(){
 		return this.questions;

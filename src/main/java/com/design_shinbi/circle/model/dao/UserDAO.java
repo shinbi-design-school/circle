@@ -167,6 +167,26 @@ public class UserDAO {
 		
 	}
 	
+	public String findUserNameById(int id) throws SQLException {
+		String userName = null;
+		
+		String sql = "SELECT name from users where id = ?";
+		PreparedStatement statement = this.connection.prepareStatement(sql);
+		statement.setInt(1, id);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		if(resultSet.next()) {
+			userName = resultSet.getString("name");
+		}
+		
+		resultSet.close();
+		statement.close();
+		
+		return userName;
+		
+	}
+	
 	public User login(String email, String password) throws SQLException, NoSuchAlgorithmException {
 		User user = this.findByEmail(email);
 		if (user != null) {
