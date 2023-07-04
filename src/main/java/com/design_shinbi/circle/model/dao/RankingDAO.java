@@ -53,7 +53,6 @@ public class RankingDAO {
 	}
 	
 	//排他制御要る？
-	private void deleteRecord() {
-		
+	private void deleteBottomRecord() {
 	}
 }

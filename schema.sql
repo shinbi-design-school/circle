@@ -1,4 +1,5 @@
 SET SESSION FOREIGN_KEY_CHECKS=0;
+SET SET sql_mode = ALLOW_INVALID_DATES;
 
 /* Drop Tables */
 

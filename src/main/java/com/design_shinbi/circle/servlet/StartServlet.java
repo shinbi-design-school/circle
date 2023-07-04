@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.design_shinbi.circle.model.Const;
 import com.design_shinbi.circle.model.Quiz;
 import com.design_shinbi.circle.model.dao.QuizDAO;
+import com.design_shinbi.circle.model.entity.User;
 import com.design_shinbi.circle.util.DbUtil;
 
 @WebServlet("/start")
@@ -23,9 +25,18 @@ public class StartServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		session.removeAttribute("quiz");
 		
+		//ログインしているかどうかの分岐処理
+		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
+		if (loginUser == null) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/login");
+			dispatcher.forward(req, resp);
+			return;
+		}
+		
 		try (Connection connection = DbUtil.connect()){
 			QuizDAO dao = new QuizDAO(connection);
 			Quiz quiz = new Quiz(dao);	
+			quiz.setUserId(loginUser.getId());
 			connection.close();
 			
 			session.setAttribute("quiz", quiz);

@@ -25,8 +25,7 @@ public class QuizServlet extends HttpServlet{
 		//ログインしているかどうかの分岐処理
 		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 		if (loginUser == null) {
-			jsp = "/login";
-			RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/login");
 			dispatcher.forward(req, resp);
 			return;
 		}

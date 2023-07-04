@@ -21,6 +21,7 @@ public class Ranking {
 	
 	public void init() throws SQLException {
 		this.scores = dao.getRecords();
+		this.sort();
 	}
 	
 	public void sort() {
@@ -29,5 +30,9 @@ public class Ranking {
 	
 	private void にぶたん() {
 		
+	}
+
+	public List<Quiz> getScores() {
+		return scores;
 	}
 }
