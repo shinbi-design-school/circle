@@ -13,17 +13,15 @@ import com.design_shinbi.circle.model.Quiz;
 
 public class RankingDAO {
 	protected Connection connection;
-	private final int HIGHER = 100;
 	
 	public RankingDAO(Connection connection) throws SQLException, NoSuchAlgorithmException {
 		this.connection = connection;
 	}
 	
 	public List<Quiz> getRecords() throws SQLException {
-		String sql = "select users.name, result.score, result.created_at from result inner join users LIMIT ?";
+		String sql = "select * from ranking";
 		
 		PreparedStatement statement = this.connection.prepareStatement(sql);
-		statement.setInt(1, HIGHER);
 		ResultSet resultSet = statement.executeQuery();
 		
 		List<Quiz> scores = new ArrayList<>();
@@ -32,9 +30,9 @@ public class RankingDAO {
 			Quiz quiz = new Quiz();
 			quiz.setId(resultSet.getInt("id"));
 			quiz.setUserId(resultSet.getInt("user_id"));
-			quiz.setFinishTime(resultSet.getTimestamp("timestamp").toLocalDateTime());
+			quiz.setStartTime(resultSet.getTimestamp("created_at").toLocalDateTime());
 			Duration tmp = Duration.ofMillis(resultSet.getLong("time"));
-			quiz.setStartTime(quiz.getFinishTime().minus(tmp));
+			quiz.setFinishTime(quiz.getStartTime().plus(tmp));
 			quiz.setCorrectCount(resultSet.getInt("correctValue"));
 			quiz.setQuestionsValue(resultSet.getInt("questionValue"));
 			

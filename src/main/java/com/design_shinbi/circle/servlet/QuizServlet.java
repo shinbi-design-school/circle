@@ -21,9 +21,9 @@ public class QuizServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String jsp = null;
 		HttpSession session = req.getSession();
+		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 		
 		//ログインしているかどうかの分岐処理
-		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 		if (loginUser == null) {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/login");
 			dispatcher.forward(req, resp);

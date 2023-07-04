@@ -11,6 +11,7 @@ public class Quiz implements Comparable<Quiz>{
 	//レコード向けフィールド
 	private int id;
 	private int userId;
+	private String userName;
 	
 	//セッション向けフィールド
 	private List<Question> questions;
@@ -73,6 +74,14 @@ public class Quiz implements Comparable<Quiz>{
 		this.userId = userId;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public List<Question> getQuestions(){
 		return this.questions;
 	}
@@ -86,6 +95,9 @@ public class Quiz implements Comparable<Quiz>{
 	}
 	
 	public int getQuestionsValue() {
+		if (questions != null) {
+			setQuestionsValue(questions.size());
+		}
 		return this.questionsValue;
 	}
 	
@@ -131,7 +143,7 @@ public class Quiz implements Comparable<Quiz>{
 	}
 	
 	public double getCorrectRate() {
-		double result = (double)getCorrectCount() / (double)questions.size(); 
+		double result = (double)getCorrectCount() / (double)getQuestionsValue(); 
 		return result;
 	}
 		
@@ -202,9 +214,9 @@ public class Quiz implements Comparable<Quiz>{
 		int self = this.calcScore();
 		int someone = o.calcScore(); 
 		if (self > someone){
-			return 1;
-		} else if ( self < someone) {
 			return -1;
+		} else if ( self < someone) {
+			return 1;
 		}
 		return 0;
 	}

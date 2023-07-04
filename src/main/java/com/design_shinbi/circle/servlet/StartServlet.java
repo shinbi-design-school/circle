@@ -24,9 +24,9 @@ public class StartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		session.removeAttribute("quiz");
+		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 		
 		//ログインしているかどうかの分岐処理
-		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 		if (loginUser == null) {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/login");
 			dispatcher.forward(req, resp);
@@ -37,6 +37,7 @@ public class StartServlet extends HttpServlet {
 			QuizDAO dao = new QuizDAO(connection);
 			Quiz quiz = new Quiz(dao);	
 			quiz.setUserId(loginUser.getId());
+			quiz.setUserName(loginUser.getName());
 			connection.close();
 			
 			session.setAttribute("quiz", quiz);
