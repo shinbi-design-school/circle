@@ -40,9 +40,9 @@ public class Ranking {
 		return userDao;
 	}
 	
-	public Quiz sameIdQuiz(int id) {
+	public Quiz sameIdQuiz(int userId) {
 		for (Quiz quiz : scores) {
-			if (quiz.getUserId() == id) {
+			if (quiz.getUserId() == userId) {
 				return quiz;
 			}
 		}
@@ -65,9 +65,10 @@ public class Ranking {
 		
 		//同じユーザーがいなかったらそのまま挿入
 		//同じユーザーがいた場合、古いレコードの方がスコアが低かったら挿入して、低い方を削除する。
+		//例外吐いたらinitして同期をとる
 		Quiz oldScore = sameIdQuiz(quiz.getUserId());
 		if (oldScore == null) {
-			try {		
+			try {
 				this.scores.add(rank, quiz);
 				int generatedId = this.rankingDao.insertRecord(quiz);
 				quiz.setId(generatedId);
@@ -76,6 +77,7 @@ public class Ranking {
 				}
 				
 			} catch (Exception e) {
+				e.printStackTrace();
 				this.init();
 			}
 		} else {
@@ -88,6 +90,7 @@ public class Ranking {
 					this.rankingDao.deleteRecord( oldScore.getId() );
 				}				
 			} catch (Exception e) {
+				e.printStackTrace();
 				this.init();
 			}
 		}

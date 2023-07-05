@@ -25,6 +25,7 @@
 		<tr>
 			<th><%=quiz.getUserName() %></th>
 			<td><%=quiz.calcScore() %></td>
+			<td><%=quiz.getStartTime() %></td>
 		</tr>
 <%
 	}

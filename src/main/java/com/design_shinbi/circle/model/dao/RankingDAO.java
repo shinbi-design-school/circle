@@ -52,25 +52,25 @@ public class RankingDAO {
 		return scores;
 	}
 	
-	public synchronized int insertRecord(Quiz quiz) throws SQLException {
+	public int insertRecord(Quiz quiz) throws SQLException {
 		if(this.connection.isClosed()){
 			System.out.println("データベースとの接続が切れています");
 		}
 
 		int generatedId = 0;
 		String sql = "INSERT INTO ranking (`user_id`, `correctValue`, `questionValue`, `time`, `created_at`) VALUES (?, ?, ?, ?, ?)";
-
-		PreparedStatement statement = this.connection.prepareStatement(sql);
+		
+		PreparedStatement statement = this.connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 		statement.setInt(1, quiz.getUserId());
 		statement.setInt(2, quiz.getCorrectCount());
 		statement.setInt(3, quiz.getQuestionsValue());
 		statement.setLong(4, Duration.between( quiz.getStartTime(), quiz.getFinishTime() ).toMillis());
 		statement.setTimestamp(5, Timestamp.valueOf(quiz.getFinishTime()));
-		statement.executeLargeUpdate();
+		statement.executeUpdate();
 		ResultSet resultSet = statement.getGeneratedKeys();
 	
 		if (resultSet.next()) {
-			generatedId = resultSet.getInt("id");
+			generatedId = resultSet.getInt(1);
 		}
 		
 		resultSet.close();
@@ -80,7 +80,7 @@ public class RankingDAO {
 		
 	}
 	
-	public synchronized void deleteRecord(int index) throws SQLException {
+	public void deleteRecord(int index) throws SQLException {
 		String sql = "DELETE FROM ranking where id = ?";
 		
 		PreparedStatement statement = this.connection.prepareStatement(sql);
