@@ -23,7 +23,7 @@ public class QuizDAO {
 	 * sql文のRAND()はレコードが増えると低速になる
 	 * 多分変えることないけど
 	 */
-	public List<Question> choiceQuestions() throws SQLException {
+	public List<Question> choiceQuestions() throws SQLException, NoSuchAlgorithmException {
 		
 		String sql = "SELECT * FROM `questions` ORDER BY RAND() LIMIT ?";
 		

@@ -1,5 +1,7 @@
 package com.design_shinbi.circle.model;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -22,8 +24,9 @@ public class Question {
 //	private Blob image2;
 //	private Blob image3;
 //	private Blob image4;
+	private String token;
 
-	public Question(String sentence, String genre, String correct, String choice2, String choice3, String choice4) {
+	public Question(String sentence, String genre, String correct, String choice2, String choice3, String choice4) throws NoSuchAlgorithmException {
 		this.sentence = sentence;
 		this.genre = genre;
 		this.correct = correct;
@@ -37,6 +40,7 @@ public class Question {
 		//this.image2 = image2;
 		//this.image3 = image3;
 		//this.image4 = image4;
+		this.setToken();
 	}
 	
 	public String getSentence() {
@@ -102,7 +106,7 @@ public class Question {
 	}
 	
 	public static Question createQuestion(String sentence, String genre, String correct, String choice2,
-			String choice3, String choice4) {
+			String choice3, String choice4) throws NoSuchAlgorithmException {
 		Question question = new Question(sentence, genre, correct, choice2, choice3, choice4);
 		return question;
 	}
@@ -114,6 +118,17 @@ public class Question {
 //		return question;
 //	}
 	
+	public String getToken() {
+		return this.token;
+	}
+	
+	private void setToken() throws NoSuchAlgorithmException {
+		SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+		byte[] randomBytes = new byte[32];
+		random.nextBytes(randomBytes);
+		this.token = new String(randomBytes);
+	}
+		
 	@Override
 	public String toString() {
 		return sentence;

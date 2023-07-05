@@ -1,5 +1,6 @@
 package com.design_shinbi.circle.model;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -37,12 +38,12 @@ public class Quiz implements Comparable<Quiz>{
 		this.questionsValue = 0;
 	}
 	
-	public Quiz(QuizDAO dao) throws SQLException {
+	public Quiz(QuizDAO dao) throws SQLException, NoSuchAlgorithmException {
 		this.dao = dao;
 		this.init();
 	}
 	
-	public void init() throws SQLException {
+	public void init() throws SQLException, NoSuchAlgorithmException {
 		this.questions = dao.choiceQuestions();
 		//データベースのrand()でシャッフルされているのでコメントアウト
 		//Collections.shuffle(questions);
@@ -173,7 +174,7 @@ public class Quiz implements Comparable<Quiz>{
 		return result;
 	}
 
-	public void setQuestions() throws SQLException {
+	public void setQuestions() throws SQLException, NoSuchAlgorithmException {
 		this.questions = this.dao.choiceQuestions();
 	}
 	

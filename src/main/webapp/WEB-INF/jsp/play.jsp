@@ -7,7 +7,7 @@
 
 <%
 	Quiz quiz = (Quiz)session.getAttribute("quiz");
-	Question question = (Question)session.getAttribute("question");
+	Question question = quiz.pick();
 	List<String> choices = question.getChoices();
 	int qNum = question.getUserAnswered() == -1 ? quiz.getAnswered() + 1 : quiz.getAnswered();
 %>
@@ -22,7 +22,8 @@
 <%
 	if (question.getUserAnswered() == -1){
 %>
-                <form action="play" method="POST">
+                <form action="advance" method="POST">
+                <input name="token" type="hidden" value="<%=question.getToken() %>">
                 <ul class="quiz-answer">
                     <li>
                         <label class="quiz-button">
