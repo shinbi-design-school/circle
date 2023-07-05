@@ -72,6 +72,7 @@ public class QuizServletAdvance extends HttpServlet{
         for (String choice : quiz.pick().getChoices()) {        	
         	out.println(choice);
         }
+        out.println(quiz.pick().getToken());
 	}	
 	
 	/* クイズゲーム終了時に、ランキングやユーザー情報を変更する処理 */

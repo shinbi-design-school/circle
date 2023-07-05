@@ -1,5 +1,6 @@
 package com.design_shinbi.circle.model;
 
+import java.nio.charset.Charset;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -126,7 +127,7 @@ public class Question {
 		SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
 		byte[] randomBytes = new byte[32];
 		random.nextBytes(randomBytes);
-		this.token = new String(randomBytes);
+		this.token = new String(randomBytes, Charset.forName("UTF-8"));
 	}
 		
 	@Override

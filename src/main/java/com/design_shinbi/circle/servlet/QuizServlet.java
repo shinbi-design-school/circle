@@ -38,7 +38,8 @@ public class QuizServlet extends HttpServlet{
 				jsp = "/WEB-INF/jsp/standby.jsp";
 				
 			} else if(quiz.getState().equals("playing")) {
-				jsp = "/WEB-INF/jsp/play.jsp";				
+//				jsp = "/WEB-INF/jsp/play.jsp";		
+				jsp = "/WEB-INF/jsp/play.html";
 			}
 			
 			if(quiz.getState().equals("finish")) {
