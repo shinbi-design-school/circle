@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	let token;
 	const viewCorrect = document.getElementsByClassName("correct-image")[0];
 	const viewIncorrect = document.getElementsByClassName("incorrect-image")[0];
+	
+	viewCorrect.style.visibility = "hidden";
+	viewIncorrect.style.visibility = "hidden";
 
 	const get = () => {		
 		fetch("advance", {
@@ -54,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	//連打したときにおかしくなる？
 	const post = (e) => {
-		
 		const data = {"userChoice" : e.target.getAttribute('num'), "token" : token};
 		
 		fetch("advance", {

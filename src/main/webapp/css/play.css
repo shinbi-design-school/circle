@@ -1,0 +1,242 @@
+@charset "UTF-8";
+
+/* プレイ画面========================================================== */
+
+.quiz {
+  background-image: url(../images/playing.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  /* z-index: -1000; */
+  padding: 50px 25px;
+}
+
+.inner-block {
+  min-height: 100vh;
+  /* padding: 0 25px; */
+  /* background: rgb(255, 245, 219); */
+  max-width: 1280px;
+  width: 100%;
+  margin: auto;
+
+}
+.quiz-content {
+    border: 1px solid #222;
+    background-color: rgba(255, 245, 219);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.quiz-question-number {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    border-bottom: 1px solid #222;
+    padding: 20px;
+}
+.quiz-question {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    position: relative;
+    /* text-align: center; */
+    padding: 30px 200px 0px;
+}
+.quiz-answer {
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 200px 100px;
+}
+.quiz-answer::before {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    font-size: 200px;
+    opacity: 0.7;
+    top: -40px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    z-index: 2;
+    pointer-events: none;
+}
+.quiz-answer.is-correct .checked {
+    background: #ffb3b3;
+}
+.quiz-answer.is-correct::before {
+    content: "〇";
+    color: #ffb3b3;
+    opacity: 0.5;
+}
+.quiz-answer.is-incorrect .checked {
+    background: #b3c7ff;
+}
+.quiz-answer.is-incorrect::before {
+    content: "×";
+    color: #b3c7ff;
+}
+.quiz-answer li {
+    position: relative;
+}
+.quiz-answer li label {
+    color: #222;
+    display: block;
+    margin: 0 auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 4px 20px 4px 80px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1.16;
+    position: relative;
+    transition: 0.3s ease-in-out;
+    border: 1px solid #000;
+    /* white-space: pre-wrap; */
+    cursor: pointer;
+
+}
+.quiz-answer li label:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.quiz-answer li label.is-checked {
+    pointer-events: none;
+}
+.quiz-answer li::after {
+    position: absolute;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    content: "";
+    width: 60px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    z-index: 1;
+    pointer-events: none;
+    border-right: 1px solid #000;
+}
+.quiz-answer li:nth-child(1)::after {
+    content: "A";
+}
+.quiz-answer li:nth-child(2)::after {
+    content: "B";
+}
+.quiz-answer li:nth-child(3)::after {
+    content: "C";
+}
+.quiz-answer li:nth-child(4)::after {
+    content: "D";
+}
+.finish {
+    display: none;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 3;
+}
+.finish.is-show {
+    display: flex;
+}
+.finish .score-wrap {
+    text-align: center;
+    color: #fff;
+}
+.finish .score-wrap .score {
+    font-size: 80px;
+    font-weight: bold;
+}
+.finish .score-wrap .ja {
+    font-size: 34px;
+}
+.finish .score-wrap .full {
+    font-size: 24px;
+}
+.finish .goback-button {
+    font-size: 14px;
+    color: #fff;
+    margin-top: 30px;
+    display: inline-block;
+}
+
+input[type=radio]{
+  appearance: none;
+  }
+
+input[type=radio]:checked+span {
+  /* color: red; */
+  border: 5px solid red;
+
+  }
+
+
+.judgement-image {
+  position: absolute;
+  bottom: 0;
+  right: 5%;
+  z-index: 500;
+  display: none;
+}
+
+.judgement-image img {
+  
+  width: 300px;
+}
+
+
+
+
+
+.play-await img,
+.play-start img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  
+}
+
+.play-await {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+}
+.play-start {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20000;
+  display: none;
+}
+
+.judgement-display {
+  display: block;
+}
+.judgement-none-display {
+  display: none;
+}
+
+
+/* プレイ画面========================================================== */

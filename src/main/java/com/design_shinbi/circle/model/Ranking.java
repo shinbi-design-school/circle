@@ -48,7 +48,7 @@ public class Ranking {
 		}
 		return null;
 	}
-	
+		
 	public synchronized void insertScore(Quiz quiz) throws SQLException {
 		//もしquizのステータスがfinishでないなら早期return
 		if (!quiz.getState().equals("finish")) {

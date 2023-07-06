@@ -7,6 +7,6 @@ public class Const {
 	
 	public static final String LOGIN_USER_KEY = "LOGIN_USER";
 	
-	public static final int QUIZ_CHOICE_VALUE = 5 ;
+	public static final int QUIZ_CHOICE_VALUE = 10 ;
 	public static final int RANKING_SIZE_MAX = 100;
 	}
