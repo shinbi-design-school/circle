@@ -32,26 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
 		fetch("advance", {
 		  method: "GET",
 		}).then(response => {
-			if (response.status === 200){
-				response.text()			
+			if (response.ok){
+				return response.text();
+			} else {
+				throw new Error();
 			}
 		})
 		.then(text => {
-			if (text){
-				let lines = text.split(/\r?\n/)
-				sentenceContainer.innerHTML = lines[0];
-				choiceContainer01.value = lines[1];
-				choiceContainer02.value = lines[2];
-				choiceContainer03.value = lines[3];
-				choiceContainer04.value = lines[4];
-				token = lines[5];
-			}
-		});
+			let lines = text.split(/\r?\n/)
+			sentenceContainer.innerHTML = lines[0];
+			choiceContainer01.value = lines[1];
+			choiceContainer02.value = lines[2];
+			choiceContainer03.value = lines[3];
+			choiceContainer04.value = lines[4];
+			token = lines[5];
+		})
+		.catch(error => console.log(error));
 		
 		
 	}
 	
-	//連打したときにおかしくなるので正誤判定まで処理を待たせる処理を追加する必要がある？
+	//連打したときにおかしくなる？
 	const post = (e) => {
 		
 		const data = {"userChoice" : e.target.getAttribute('num'), "token" : token};
@@ -61,30 +62,31 @@ document.addEventListener('DOMContentLoaded', () => {
 		  headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
 		  body: EncodeHTMLForm( data ),
 		}).then(response => {
-			if (response.status === 200){
-				response.text()			
+			if (response.ok){
+				return response.text();
+			} else {
+				throw new Error();
 			}
 		})
 		.then(text => {
-			if (text){	
-				let lines = text.split(/\r?\n/);
-				
-				if ( lines[0] === 'correct' ){
-					viewCorrect.style.visibility = "visible";
-					viewIncorrect.style.visibility = "hidden";
-				} else {
-					viewCorrect.style.visibility = "hidden";
-					viewIncorrect.style.visibility = "visible";
-				}
-				
-				if (lines.length > 1 && lines[1] === "finish"){
-					window.location.href = "./play";
-				} else {
-					get();
-				}
+			let lines = text.split(/\r?\n/);
+			
+			if ( lines[0] === 'correct' ){
+				viewCorrect.style.visibility = "visible";
+				viewIncorrect.style.visibility = "hidden";
+			} else {
+				viewCorrect.style.visibility = "hidden";
+				viewIncorrect.style.visibility = "visible";
+			}
+			
+			if (lines.length > 1 && lines[1] === "finish"){
+				window.location.href = "./play";
+			} else {
+				get();
 			}
 				
-		});
+		})
+		.catch(error => console.log(error));
 		
 
 

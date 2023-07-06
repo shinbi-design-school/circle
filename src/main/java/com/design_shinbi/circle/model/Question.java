@@ -33,7 +33,7 @@ public class Question {
 		this.choice2 = choice2;
 		this.choice3 = choice3;
 		this.choice4 = choice4;
-		this.choices = Arrays.asList(correct, choice2, choice3, choice4);
+		this.choices = Arrays.asList(this.correct, this.choice2, this.choice3, this.choice4);
 		this.shuffle();
 		this.userAnswered = -1;
 		//this.imagec = imagec;

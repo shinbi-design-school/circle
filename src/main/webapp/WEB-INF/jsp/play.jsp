@@ -7,6 +7,8 @@
 
 <%
 	Quiz quiz = (Quiz)session.getAttribute("quiz");
+	Question question = quiz.pick();
+	List<String> choices = question.getChoices();
 %>
 <!DOCTYPE html>
 <html>
