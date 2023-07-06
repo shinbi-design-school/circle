@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.transition {
+  max-width: 960px;
+  width: 100%;
+  padding: 0 25px;
+  margin: 50px auto 50px;
+  text-align: center;
+
+}
+
+.transition_link a {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 20px 10px;
+  min-width: 300px;
+  line-height: 1;
+  background-color: rgb(210, 180, 140, 1);
+  display: inline-block;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.transition_link a:hover {
+  background-color: rgb(210, 180, 140, 0.5);
+
+}
+
+.transition_link:nth-child(2) {
+  margin-top: 40px;
+}
