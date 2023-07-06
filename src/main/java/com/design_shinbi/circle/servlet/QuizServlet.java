@@ -18,7 +18,7 @@ import com.design_shinbi.circle.model.entity.User;
 public class QuizServlet extends HttpServlet{
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String jsp = null;
 		HttpSession session = req.getSession();
 		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
@@ -38,11 +38,11 @@ public class QuizServlet extends HttpServlet{
 				jsp = "/WEB-INF/jsp/standby.jsp";
 				
 			} else if(quiz.getState().equals("playing")) {
-//				jsp = "/WEB-INF/jsp/play.jsp";		
-				jsp = "/WEB-INF/jsp/play.html";
-			}
-			
-			if(quiz.getState().equals("finish")) {
+				jsp = "/WEB-INF/jsp/play.jsp";
+//				htmlだとQuizが生成されるまえにjudgement.js経由のgetが行われてぐちゃぐちゃになる
+//				jsp = "/WEB-INF/jsp/play.html";
+				
+			} else if(quiz.getState().equals("finish")) {
 				jsp = "/WEB-INF/jsp/result.jsp";
 			}
 		} else {

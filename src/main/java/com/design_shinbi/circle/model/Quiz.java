@@ -112,14 +112,8 @@ public class Quiz implements Comparable<Quiz>{
 		if (this.getAnswered() >= this.questionsValue) {
 			if (this.getState().equals("playing")) {
 				this.setState("finish");
-			} else {
-				this.setState("standby");
 			}
-		} else {
-			if (this.getState().equals("finish")){
-				this.setState("standby");
-			}
-		}
+		} 
 		
 		if (this.getState().equals("standby")) {
 			this.setAnswered(0);
@@ -179,7 +173,10 @@ public class Quiz implements Comparable<Quiz>{
 	}
 	
 	public Question pick() {
-		return questions.get(this.getAnswered());
+		if (this.getAnswered() < this.getQuestionsValue()) {
+			return questions.get(this.getAnswered());			
+		}
+		return null;
 	}
 	
 	public int calcScore() {

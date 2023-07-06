@@ -1,61 +1,105 @@
-document.addEventListener('DOMContentLoaded', () => {
-	const sentenceContainer = document.getElementsByClassName("quiz-question")[0];
-	const choiceContainers01 = document.getElementsByClassName("quiz-text01")[0];	
-	const choiceContainers02 = document.getElementsByClassName("quiz-text02")[0];	
-	const choiceContainers03 = document.getElementsByClassName("quiz-text03")[0];	
-	const choiceContainers04 = document.getElementsByClassName("quiz-text04")[0];
-	const tokenContainer = document.getElementById("token");
-	const viewCorrect = document.getElementsByClassName("correct-image")[0];
-	const viewinCorrect = document.getElementsByClassName("incorrect-image")[0];
+function EncodeHTMLForm( data )
+{
+    var params = [];
 
-	const get = function(){
-		const xhr = new XMLHttpRequest();
-		xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
-		xhr.open("GET", "advance");
-		xhr.send();
+    for( var name in data )
+    {
+        var value = data[ name ];
+        var param = encodeURIComponent( name ) + '=' + encodeURIComponent( value );
+
+        params.push( param );
+    }
+
+    return params.join( '&' ).replace( /%20/g, '+' );
+}
+
+document.addEventListener('DOMContentLoaded', () => {
 		
-		xhr.onreadystatechange = () => {
-			if( this.readyState == 4 && this.status == 200 ){
-				//問題文と選択肢×4がはいったplain/textを処理する
-				let lines = this.responseText.split(/\r?\n/);
-				sentenceContainer.innerHTML = lines[0];
-				choiceContainers01.innerHTML = lines[1];
-				choiceContainers02.innerHTML = lines[2];
-				choiceContainers03.innerHTML = lines[3];
-				choiceContainers04.innerHTML = lines[4];
-				tokenContainer.innerHTML = lines[5];
+	const sentenceContainer = document.getElementsByClassName("quiz-question")[0];
+	const choiceContainer01 = document.getElementsByClassName("quiz-text01")[0];	
+	const choiceContainer02 = document.getElementsByClassName("quiz-text02")[0];	
+	const choiceContainer03 = document.getElementsByClassName("quiz-text03")[0];	
+	const choiceContainer04 = document.getElementsByClassName("quiz-text04")[0];
+	choiceContainer01.setAttribute('num', '0');
+	choiceContainer02.setAttribute('num', '1');
+	choiceContainer03.setAttribute('num', '2');
+	choiceContainer04.setAttribute('num', '3');
+	let token;
+	const viewCorrect = document.getElementsByClassName("correct-image")[0];
+	const viewIncorrect = document.getElementsByClassName("incorrect-image")[0];
+
+	const get = () => {		
+		fetch("advance", {
+		  method: "GET",
+		}).then(response => {
+			if (response.status === 200){
+				response.text()			
 			}
-		};
+		})
+		.then(text => {
+			if (text){
+				let lines = text.split(/\r?\n/)
+				sentenceContainer.innerHTML = lines[0];
+				choiceContainer01.value = lines[1];
+				choiceContainer02.value = lines[2];
+				choiceContainer03.value = lines[3];
+				choiceContainer04.value = lines[4];
+				token = lines[5];
+			}
+		});
 		
 		
 	}
 	
-	//連打したときにおかしくなるので正誤判定まで処理を待たせる処理を追加する必要がある。
-	const post = function(userChoice, token){
-		const xhr = new XMLHttpRequest();
-		xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
-		const data = {"userChoice" : userChoice, "token" : token};
-
-		xhr.open("POST", "advance");
-		xhr.send( EncodeHTMLForm( data ) );	
-
-		let response;
-		xhr.onreadystatechange = () => {
-			if( this.readyState == 4 && this.status == 200 ){
-				if ( this.responseText === 'correct' ){
-					return true;
+	//連打したときにおかしくなるので正誤判定まで処理を待たせる処理を追加する必要がある？
+	const post = (e) => {
+		
+		const data = {"userChoice" : e.target.getAttribute('num'), "token" : token};
+		
+		fetch("advance", {
+		  method: "POST",
+		  headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
+		  body: EncodeHTMLForm( data ),
+		}).then(response => {
+			if (response.status === 200){
+				response.text()			
+			}
+		})
+		.then(text => {
+			if (text){	
+				let lines = text.split(/\r?\n/);
+				
+				if ( lines[0] === 'correct' ){
+					viewCorrect.style.visibility = "visible";
+					viewIncorrect.style.visibility = "hidden";
 				} else {
-					return false;
+					viewCorrect.style.visibility = "hidden";
+					viewIncorrect.style.visibility = "visible";
+				}
+				
+				if (lines.length > 1 && lines[1] === "finish"){
+					window.location.href = "./play";
+				} else {
+					get();
 				}
 			}
-		};		
+				
+		});
+		
+
 
 	}
 	
-	choiceContainers01.onclick() = post("0", token.value);		
-	choiceContainers02.onclick() = post("1", token.value);		
-	choiceContainers03.onclick() = post("2", token.value);		
-	choiceContainers04.onclick() = post("3", token.value);		
+	get();
+
+	choiceContainer01.onclick = "";
+	choiceContainer01.addEventListener("click", post, false);
+	choiceContainer02.onclick = "";
+	choiceContainer02.addEventListener("click", post, false);
+	choiceContainer03.onclick = "";
+	choiceContainer03.addEventListener("click", post, false);
+	choiceContainer04.onclick = "";
+	choiceContainer04.addEventListener("click", post, false);
 
 }, false);
 

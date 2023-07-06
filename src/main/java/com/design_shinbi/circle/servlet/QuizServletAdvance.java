@@ -22,6 +22,7 @@ public class QuizServletAdvance extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		Quiz quiz = (Quiz)session.getAttribute("quiz");
+		quiz.chkState();
 
 		resp.setContentType("text/plain");
 		req.setCharacterEncoding("UTF-8");
@@ -48,6 +49,7 @@ public class QuizServletAdvance extends HttpServlet{
 		quiz.setAnswered(quiz.getAnswered() + 1);
 		
 		if (quiz.getAnswered() >= quiz.getQuestionsValue()) {
+			quiz.setState("finish");
 			out.println("finish");
 			try {
 				resultProcess(quiz);
@@ -66,13 +68,15 @@ public class QuizServletAdvance extends HttpServlet{
 		resp.setContentType("text/plain");
 		req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        
+	        
         PrintWriter out = resp.getWriter();
-        out.println(quiz.pick().getSentence());
-        for (String choice : quiz.pick().getChoices()) {        	
-        	out.println(choice);
+        if (quiz.pick() != null) {
+        	out.println(quiz.pick().getSentence());
+        	for (String choice : quiz.pick().getChoices()) {        	
+        		out.println(choice);
+        	}
+        	out.println(quiz.pick().getToken());        	
         }
-        out.println(quiz.pick().getToken());
 	}	
 	
 	/* クイズゲーム終了時に、ランキングやユーザー情報を変更する処理 */

@@ -7,72 +7,25 @@
 
 <%
 	Quiz quiz = (Quiz)session.getAttribute("quiz");
-	Question question = quiz.pick();
-	List<String> choices = question.getChoices();
-	int qNum = question.getUserAnswered() == -1 ? quiz.getAnswered() + 1 : quiz.getAnswered();
 %>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
 <body>
-    <div id="wrapper">
-        <main class="quiz">
-            <div class="inner-block">
-                <h1 class="quiz-question-number">問題<%=qNum %></h1>
-                <h2 class="quiz-question"><%=question.getSentence() %></h2>
-<%
-	if (question.getUserAnswered() == -1){
-%>
-                <form action="advance" method="POST">
-                <input name="token" type="hidden" value="<%=question.getToken() %>">
-                <ul class="quiz-answer">
-                    <li>
-                        <label class="quiz-button">
-                            <input name="userChoice" type="radio" value="0">
-                            <span><%= choices.get(0) %></span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="quiz-button">
-                            <input name="userChoice" type="radio" value="1">
-                            <span><%= choices.get(1) %></span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="quiz-button">
-                            <input name="userChoice" type="radio" value="2">
-                            <span><%= choices.get(2) %></span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="quiz-button">
-                            <input name="userChoice" type="radio" value="3">
-                            <span><%= choices.get(3) %></span>
-                        </label>
-                    </li>
-                    <input class="quiz-answer-button" type="submit" value="回答">
-                </ul>
-                </form>
-<%
-	}
-%>
-            </div>
-<%
-if (question.getUserAnswered() != -1){
-		if (question.isCorrect(question.getUserAnswered())){
-%>
-	<h2>正解です</h2>
-	<a href="play">次へ</a>
-<%
-		} else {
-%>
-	<h2>不正解です</h2>
-	<a href="play">次へ</a>
-<%
-		}
-	}
-%>
-        </main>
-    </div>
+	<div class="quiz-question">undefined</div>
+	<div>
+		<input class="quiz-text01" type="button" value="undefined">
+		<input class="quiz-text02" type="button" value="undefined">
+		<input class="quiz-text03" type="button" value="undefined">
+		<input class="quiz-text04" type="button" value="undefined">
+	</div>
+	<div class="correct-image"></div>
+	<div class="incorrect-image"></div>
+<script src="./js/judgement.js"></script>
 </body>
 </html>
 	

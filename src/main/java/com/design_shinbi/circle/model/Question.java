@@ -1,11 +1,10 @@
 package com.design_shinbi.circle.model;
 
-import java.nio.charset.Charset;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 /*
  * image系フィールドはnullになる場合があること、ファイル名フィールドが必要なこと、Blobからの変更が必要なことから保留
@@ -124,10 +123,12 @@ public class Question {
 	}
 	
 	private void setToken() throws NoSuchAlgorithmException {
-		SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-		byte[] randomBytes = new byte[32];
-		random.nextBytes(randomBytes);
-		this.token = new String(randomBytes, Charset.forName("UTF-8"));
+//		SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+//		byte[] randomBytes = new byte[32];
+//		random.nextBytes(randomBytes);
+//		this.token = new String(randomBytes, Charset.forName("UTF-8"));
+		UUID uuid = UUID.randomUUID();
+        this.token = uuid.toString();
 	}
 		
 	@Override

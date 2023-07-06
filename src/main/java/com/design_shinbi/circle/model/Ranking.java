@@ -50,6 +50,12 @@ public class Ranking {
 	}
 	
 	public synchronized void insertScore(Quiz quiz) throws SQLException {
+		//もしquizのステータスがfinishでないなら早期return
+		if (!quiz.getState().equals("finish")) {
+			System.out.println("終わっていないクイズでランキングに参加しようとしました。");
+			return;
+		}
+		
 		//とりあえずソートしておく。
 		//this.sort();
 
@@ -81,7 +87,7 @@ public class Ranking {
 				this.init();
 			}
 		} else {
-			try {		
+			try {
 				if (oldScore.calcScore() < quiz.calcScore() ) {
 					this.scores.add(rank, quiz);
 					int generatedId = this.rankingDao.insertRecord(quiz);
