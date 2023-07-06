@@ -14,16 +14,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/result.css">
+<link rel="stylesheet" type="text/css" href="css/transition.css">
+<title>リザルトページ</title>
 </head>
 <body>
-	<h1>リザルトページ</h1>
-	<div class="result">
-		<p><%=quiz.getQuestionsValue() %>問中</p>
-		<p><%=quiz.getCorrectCount() %>問正解しました。</p>
-		<p>正解率は<%=correctRate %>%です</p>
-		<p><%=quiz.getElapsedSeconds()%>秒かかりました。</p>
-		<p>履歴</p>
+	<section class="result">
+	
+		<div class="result_inner">
+			<h1 class="result_title">Your Results</h1>
+				<div class="result_body">
+					<div class="result_text">
+						<p class="result_correct">
+							<%=quiz.getQuestionsValue() %>問中
+							<%=quiz.getCorrectCount() %>問正解しました。
+						</p>
+						<p class="result_accuracy">
+							正解率は<%=correctRate %>%です
+						</p>
+						<p class="result_time">
+							クリアまで<%=quiz.getElapsedSeconds()%>秒かかりました。
+						</p>
+					</div>
+				</div>
+	</section>
+	
+	<div class="result_table">
+		<p class="result_head">プレイ履歴</p>
 		<table>
 <%
 	for (Question question : quiz.getQuestions()){
