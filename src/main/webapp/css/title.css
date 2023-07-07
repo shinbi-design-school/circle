@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+/* タイトル画面========================================================== */
+.intro-mv video,
+.title-mv video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+.title-mv {
+  position: relative;
+}
+
+
+.mv-hidden {
+  display: none;
+}
+
+.start-button {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  border-style: none;
+  background-color: rgba(0,0,0,0);
+}
+
+.start-button:active {
+	opacity: 0.8;
+}
+
+.start-button-link {
+
+}
+
+.start-button-link img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* タイトル画面========================================================== */
