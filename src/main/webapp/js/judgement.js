@@ -27,9 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	let token;
 	const viewCorrect = document.getElementsByClassName("correct-image")[0];
 	const viewIncorrect = document.getElementsByClassName("incorrect-image")[0];
+	let questionNumber = 1;
+	const questionNumberContainer = document.getElementsByClassName("quiz-question-number")[0];
 	
 	viewCorrect.style.visibility = "hidden";
 	viewIncorrect.style.visibility = "hidden";
+	
+	const finish = () => {
+		window.location.href = "./play";
+	}
 
 	const get = () => {		
 		fetch("advance", {
@@ -49,14 +55,28 @@ document.addEventListener('DOMContentLoaded', () => {
 			choiceContainer03.value = lines[3];
 			choiceContainer04.value = lines[4];
 			token = lines[5];
+			viewCorrect.style.visibility = "hidden";
+			viewIncorrect.style.visibility = "hidden";
+			questionNumberContainer.textContent = `問題${questionNumber++}`;
+			
+			choiceContainer01.onclick = "";
+			choiceContainer01.addEventListener("click", post, false);
+			choiceContainer02.onclick = "";
+			choiceContainer02.addEventListener("click", post, false);
+			choiceContainer03.onclick = "";
+			choiceContainer03.addEventListener("click", post, false);
+			choiceContainer04.onclick = "";
+			choiceContainer04.addEventListener("click", post, false);
+			
 		})
 		.catch(error => console.log(error));
 		
 		
 	}
 	
-	//連打したときにおかしくなる？
 	const post = (e) => {
+		e.target.removeEventListener("click", post);
+		
 		const data = {"userChoice" : e.target.getAttribute('num'), "token" : token};
 		
 		fetch("advance", {
@@ -82,28 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 			
 			if (lines.length > 1 && lines[1] === "finish"){
-				window.location.href = "./play";
+				setTimeout(finish, 2000);
 			} else {
-				get();
+				setTimeout(get, 2000);
 			}
 				
 		})
 		.catch(error => console.log(error));
 		
-
-
 	}
 	
 	get();
-
-	choiceContainer01.onclick = "";
-	choiceContainer01.addEventListener("click", post, false);
-	choiceContainer02.onclick = "";
-	choiceContainer02.addEventListener("click", post, false);
-	choiceContainer03.onclick = "";
-	choiceContainer03.addEventListener("click", post, false);
-	choiceContainer04.onclick = "";
-	choiceContainer04.addEventListener("click", post, false);
 
 }, false);
 

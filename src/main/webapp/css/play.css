@@ -195,7 +195,6 @@ input[type=radio]:checked+span {
   bottom: 0;
   right: 5%;
   z-index: 500;
-  display: none;
 }
 
 .judgement-image img {
