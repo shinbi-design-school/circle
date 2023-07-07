@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if ( lines[0] === 'correct' ){
 				viewCorrect.style.visibility = "visible";
 				viewIncorrect.style.visibility = "hidden";
-			} else {
+			} else if ( lines[0] === 'incorrect' ) {
 				viewCorrect.style.visibility = "hidden";
 				viewIncorrect.style.visibility = "visible";
 			}

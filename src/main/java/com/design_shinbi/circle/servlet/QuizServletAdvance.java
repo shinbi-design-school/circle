@@ -22,7 +22,6 @@ public class QuizServletAdvance extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		Quiz quiz = (Quiz)session.getAttribute("quiz");
-		quiz.chkState();
 
 		resp.setContentType("text/plain");
 		req.setCharacterEncoding("UTF-8");
@@ -33,31 +32,46 @@ public class QuizServletAdvance extends HttpServlet{
 		
 		PrintWriter out = resp.getWriter();
 
+		if (quiz == null || !quiz.getState().equals("playing")) {
+			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			out.println("無効なリクエストです。");
+			return;
+		}
+
+		quiz.chkState();
+
 		if (choice == null || token == null) {
+			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			out.println("POSTされたデータに不備があります。");
 			return;
 		}
 		
-		quiz.pick().setUserAnswered(choice);
-		
-		if (quiz.pick().hasCorrect() && quiz.pick().getToken().equals(token)) {
-			out.println("correct");
-			quiz.setCorrectCount(quiz.getCorrectCount() + 1);
-		} else {
-			out.println("incorrect");
-		}
-		quiz.setAnswered(quiz.getAnswered() + 1);
-		
-		if (quiz.getAnswered() >= quiz.getQuestionsValue()) {
-			quiz.setState("finish");
-			out.println("finish");
-			try {
-				resultProcess(quiz);
-			} catch (SQLException e) {
-				e.printStackTrace();
+		if (quiz.pick().getToken().equals(token)) {
+			
+			quiz.pick().setUserAnswered(choice);
+			
+			if (quiz.pick().hasCorrect()) {
+				out.println("correct");
+				quiz.setCorrectCount(quiz.getCorrectCount() + 1);
+			} else {
+				out.println("incorrect");
 			}
-		}
+			quiz.setAnswered(quiz.getAnswered() + 1);
+			
+			if (quiz.getAnswered() >= quiz.getQuestionsValue()) {
+				quiz.setState("finish");
+				out.println("finish");
+				try {
+					resultProcess(quiz);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 						
+		} else {
+			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			out.println("受け付けていないクイズへの回答です。");
+		}
 	}
 
 	@Override
