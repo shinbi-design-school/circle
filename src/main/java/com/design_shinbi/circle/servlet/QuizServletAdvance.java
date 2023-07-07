@@ -3,6 +3,7 @@ package com.design_shinbi.circle.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -84,6 +85,18 @@ public class QuizServletAdvance extends HttpServlet{
         resp.setCharacterEncoding("UTF-8");
 	        
         PrintWriter out = resp.getWriter();
+        
+        if (quiz == null) {
+        	resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        	out.println("クイズセッションが作成されていません。");
+        	return;
+        }
+
+//        quizの回答回数が0でGETされたらそのタイミングをスタートとする
+        if (quiz.getAnswered() == 0) {
+        	quiz.setStartTime(LocalDateTime.now());
+        }
+        
         if (quiz.pick() != null) {
         	out.println(quiz.pick().getSentence());
         	for (String choice : quiz.pick().getChoices()) {        	
