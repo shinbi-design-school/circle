@@ -1,0 +1,197 @@
+@charset "UTF-8";
+
+/* ランキング========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@200;700&display=swap');
+
+
+.standings {
+  background-image: url(../images/ranking_dark.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: -1000;
+  padding: 50px 0;
+}
+
+.standings::after {
+  content: "";
+  background-color: black;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+}
+
+.standings__inner {
+  max-width: 960px;
+  width: 100%;
+  padding: 0 25px;
+  margin: 30px auto;
+  /* z-index: 500; */
+  font-family: 'M PLUS 1', sans-serif;
+}
+
+.standings__title {
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 56px;
+  color: rgb(255, 255, 128);
+  text-align: center;
+  animation-name: neon;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes neon {
+	0%, 100% {
+		text-shadow: 0px 0px 40px rgb(255, 255, 128), 0px 0px 40px rgb(255, 255, 128), 0px 0px 40px rgb(255, 255, 128);
+		opacity: 1; 
+	}
+	50% {
+		text-shadow: 0px 0px 3px rgb(255, 255, 128);
+		opacity: 0.3;
+	}
+}
+
+.standings__table {
+  padding: 32px;
+  margin: 50px auto 0;
+  max-width: 650px;
+  position: relative;
+  color:white;
+}
+
+.standings__table::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgb(25, 25, 25, 0.9);
+  border: 2px solid rgb(128, 128, 128);
+  z-index: -50;
+
+}
+
+.standings__row {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+
+}
+
+.standings__row p {
+  line-height: 1;
+}
+
+.standings__row--head {
+  margin-bottom: 20px;
+}
+
+.standings__head {
+  text-align: center;
+  font-size: 18px;
+  font-style: italic;
+
+}
+
+.standings__head--rank {
+  width: 80px;
+  background-color: #02b0b977;
+  padding: 10px;
+  margin: 10px;
+
+}
+
+.standings__head--name {
+  width: 350px;
+  background-color: #02b0b977;
+  padding: 10px;
+  margin: 10px;
+}
+
+.standings__head--point {
+  width: 100px;
+  background-color: #02b0b977;
+  padding: 10px;
+  margin: 10px;
+
+}
+
+.standings__rank {
+  width: 80px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  padding: 10px;
+  line-height: 1;
+  margin: 10px;
+
+}
+.standings__rank--1 {
+  font-size: 48px;
+  text-shadow: -1px -1px 2px black;
+  color: white;
+  border-radius: 4px;
+  background: rgb(98,97,103);
+  background: linear-gradient(90deg, rgba(98,97,103,1) 0%, rgba(2,0,36,1) 16%, rgba(240,236,105,1) 59%, rgba(255,255,255,1) 71%, rgba(236,232,93,1) 81%, rgba(107,105,44,1) 100%);
+}
+.standings__rank--2 {
+  font-size: 32px;
+  text-shadow: -1px -1px 2px black;
+  color: white;
+  border-radius: 4px;
+  background: rgb(98,97,103);
+  background: linear-gradient(90deg, rgba(98,97,103,1) 0%, rgba(2,0,36,1) 16%, rgba(138,139,138,1) 59%, rgba(255,255,255,1) 71%, rgba(134,140,139,1) 81%, rgba(57,66,62,1) 100%);
+}
+.standings__rank--3 {
+  font-size: 32px;
+  text-shadow: -1px -1px 2px black;
+  color: white;
+  border-radius: 4px;
+  background: rgb(98,97,103);
+  background: linear-gradient(90deg, rgba(98,97,103,1) 0%, rgba(2,0,36,1) 16%, rgba(103,73,12,1) 59%, rgba(255,255,255,1) 71%, rgba(89,65,20,1) 81%, rgba(66,64,57,1) 100%);
+}
+.standings__name {
+  width: 350px;
+  word-wrap: break-word;
+  font-size: 20px;
+  padding: 10px;
+  line-height: 1;
+  margin-left: 25px;
+  margin: 10px;
+  font-family: 'M PLUS 1', sans-serif;
+  font-style: italic;
+}
+.standings__point {
+  width: 100px;
+  text-align: center;
+  font-style: italic;
+  font-size: 22px;
+  padding: 10px;
+  margin-left: 25px;
+  position: relative;
+  margin: 10px;
+
+}
+.standings__point::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 10px;
+  background-color: rgba(255, 0, 0, 0.445);
+  bottom: 10px;
+  left: 0;
+  z-index: -1;
+
+}
+
+/* ランキング========================================================== */
