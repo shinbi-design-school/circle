@@ -20,7 +20,7 @@
 <%
 	if(user.isAdmin()){
 %>
-          <li class="header-nav__item header-nav__authority">権限</li>
+          <li class="header-nav__item header-nav__authority">管理画面へ</li>
 <%
 	}
 %>

@@ -3,6 +3,9 @@
 /* ランキング========================================================== */
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@200;700&display=swap');
 
+body {
+	background-color: #0c162a;
+}
 
 .standings {
   background-image: url(../images/ranking_dark.jpg);

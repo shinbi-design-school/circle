@@ -3,9 +3,11 @@
     
 <div class="transition">
   <div class="replay transition__link">
-    <a href="./top">もう一度プレイする</a>
+    <a href="./top">RESTART</a>
   </div>
+  <!-- 
   <div class="to-userPage transition__link">
     <a href="./mypage">ユーザーページへ</a>
   </div>
+   -->
 </div>
