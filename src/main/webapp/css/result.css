@@ -124,8 +124,45 @@ body {
   color: red;
 }
 
+.ranking {
+	margin: 50px auto;	
+	width: fit-content;
+	position: relative;
+}
 
+.ranking-link {
+	text-align: center;
+}
 
+.ranking-link a {
+	color: white;
+	font-size: 24px;
+	font-style: italic;
+	animation-name: neon;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+}
 
+.ranking-link::after {
+	content: "";
+	background-color: black;
+	border-radius: 5px;
+	width: 115px;
+	height: 30px;
+	left: 0px;
+	bottom: 0px;
+	position: absolute;
+	z-index: -10;
+}
 
+@keyframes neon {
+	0%, 100% {
+		text-shadow: 0px 0px 20px rgb(255, 255, 128), 0px 0px 20px rgb(255, 255, 128), 0px 0px 20px rgb(255, 255, 128);
+		opacity: 1; 
+	}
+	50% {
+		text-shadow: 0px 0px 3px rgb(255, 255, 128);
+		opacity: 0.3;
+	}
+}
 /* リザルト========================================================== */

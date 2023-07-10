@@ -58,6 +58,11 @@
 %>
 		</table>
 	</div>
+	<div class="ranking">
+		<div class="ranking-link">
+			<a href="./ranking" title="ランキング">RANKING</a>
+		</div>
+	</div>
 	
 <jsp:include page="transition.jsp" />
 </body>
