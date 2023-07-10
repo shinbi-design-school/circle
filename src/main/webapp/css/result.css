@@ -1,6 +1,12 @@
 @charset "UTF-8";
 
 /* リザルト========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@200;700&display=swap');
+
+body {
+	background-color: #0c162a;
+	font-family: 'M PLUS 1', sans-serif;
+}
 
 .result {
   background-image: url(../images/result.jpg);
@@ -85,10 +91,16 @@
 }
 
 .result_table {
+  color: white;
   margin: 70px auto 0;
   width: fit-content;
   z-index: 10;
+}
 
+.result_table tr {
+	border-color: white;
+	border-top: 1px;
+	border-bottom: 1px;
 }
 
 .result_head {
