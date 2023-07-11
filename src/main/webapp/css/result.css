@@ -21,7 +21,8 @@ body {
 
 .result::after {
   content: "";
-  background-color: black;
+/*  background-color: black;*/
+  background-image:repeating-linear-gradient(#000, #000 2px, #111 2px, #111 4px);
   opacity: 0.5;
   position: absolute;
   top: 0;
@@ -45,6 +46,7 @@ body {
 
 .result_title {
   text-transform: uppercase;
+  text-shadow: 0px 2px 1px black;
   font-weight: bold;
   font-size: 56px;
   color: #F2B10C;
@@ -138,9 +140,6 @@ body {
 	color: white;
 	font-size: 24px;
 	font-style: italic;
-	animation-name: neon;
-	animation-duration: 3s;
-	animation-iteration-count: infinite;
 }
 
 .ranking-link::after {
@@ -155,14 +154,4 @@ body {
 	z-index: -10;
 }
 
-@keyframes neon {
-	0%, 100% {
-		text-shadow: 0px 0px 20px rgb(255, 255, 128), 0px 0px 20px rgb(255, 255, 128), 0px 0px 20px rgb(255, 255, 128);
-		opacity: 1; 
-	}
-	50% {
-		text-shadow: 0px 0px 3px rgb(255, 255, 128);
-		opacity: 0.3;
-	}
-}
 /* リザルト========================================================== */
