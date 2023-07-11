@@ -68,7 +68,7 @@ public class UserDAO {
 		user.setName(resultSet.getString("name"));
 		user.setAdmin(resultSet.getBoolean("is_admin"));
 		user.setPassword(resultSet.getString("password"));
-		user.setImageFileName(resultSet.getString("icon_file_name"));
+		user.setIconFileName(resultSet.getString("icon_file_name"));
 		user.setCreatedAt(resultSet.getTimestamp("created_At"));
 		user.setUpdatedAt(resultSet.getTimestamp("updated_At"));
 
@@ -250,7 +250,7 @@ public class UserDAO {
 		return user;
 	}
 
-	public void removeImage(int id) throws SQLException {
+	public void removeIcon(int id) throws SQLException {
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 
 		String sql = "UPDATE users SET icon_file_name = ?, icon = ?,"
@@ -266,7 +266,7 @@ public class UserDAO {
 		statement.close();
 	}
 
-	public void setImage(int id, String fileName, InputStream stream)
+	public void setIcon(int id, String fileName, InputStream stream)
 			throws SQLException {
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 
@@ -283,7 +283,7 @@ public class UserDAO {
 		statement.close();
 	}
 
-	public Icon getImage(int id) throws SQLException {
+	public Icon getIcon(int id) throws SQLException {
 		String sql = "SELECT icon, icon_file_name FROM users WHERE id = ?";
 		PreparedStatement statement = this.connection.prepareStatement(sql);
 

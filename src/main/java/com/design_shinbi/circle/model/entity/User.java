@@ -52,12 +52,12 @@ public class User {
 		this.admin = admin;
 	}
 
-	public String getImageFileName() {
+	public String getIconFileName() {
 		return iconFileName;
 	}
 
-	public void setImageFileName(String imageFileName) {
-		this.iconFileName = imageFileName;
+	public void setIconFileName(String iconFileName) {
+		this.iconFileName = iconFileName;
 	}
 
 	public Timestamp getCreatedAt() {
