@@ -16,7 +16,9 @@
         </a>
 
         <ul class="header-nav__items">
-          <li class="header-nav__item header-nav__name"><%=user.getName() %></li>
+          <li class="header-nav__item header-nav__name">
+			<a href="./user"><%=user.getName() %></a>
+          </li>
           <li class="header-nav__item header-nav__name">
           	<a href="./logout">ログアウト</a>
           </li>
