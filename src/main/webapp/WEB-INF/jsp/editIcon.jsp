@@ -15,24 +15,18 @@
 <body>
     <h1 class="mypage_title">INFORMATION</h1>
     <div class="mypage_information_container">
-        <form id="new_icon_form" method="post" action="user">
+        <form id="edit_icon_form" method="post" action="user">
         <div>
-            <div id="icon_file_name"></div>
+        	<span id="icon_file_name"><%= iconFileName %></span>
             <input id="user_icon_file" type="file" name="icon_file">
             <a href="javascript:removeIcon()">
                 <span class="icon_red fas fa-times_circle"></span>
             </a>
         </div>
-<%
-    if(fileName != null && !fileName.isEmpty()) {
-%>
-        <img src="img?id=<%= uesr.getId() %>">
-<%
-    }
-%>
         <div>
-            <input id="submit" type="submit" name="submit" value="編集">
+            <input id="submit" type="submit" name="submit" value="更新">
         </div>
+        <input type="hidden" name="id" value="<%= user.getId() %>>
         <input type="hidden" name="delete_icon_flag" value="false">
         </form>
         <div class="mypage_information_table">
@@ -83,6 +77,18 @@
             <p>100</p>
         </div>
     </div>
-
+	<script>
+<%
+	if(imageFileName == null || imageFileName.isEmpty()) {
+%>
+					$('#icon_file_name').css('display', 'none');
+<%
+	}
+	else {
+%>
+					$('user_icon_file').css('display', 'none');
+<%
+	}
+%>
 </body>
 </html>

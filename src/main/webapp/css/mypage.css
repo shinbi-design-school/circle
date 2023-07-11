@@ -1,0 +1,50 @@
+@charset "utf-8";
+
+.mypage_title {
+    text-align: center;
+}
+
+.mypage_information_container {
+    display: flex;
+}
+
+.mypage_icon {
+    width: 50%;
+    margin: 30px;
+    text-align: center;
+}
+
+.mypage_icon img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.mypage_information_table {
+    width: 50%;
+}
+
+.mypage_information_table table {
+    height: 200px;
+    text-align: left;
+}
+
+.mypage_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mypage_history {
+    width: 100%;
+    text-align: center;
+}
+
+.mypage_ranking {
+    width: 100%;
+    text-align: center;
+}
+
+.mypage_score {
+    width: 100%;
+    text-align: center;
+}
