@@ -16,10 +16,12 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/reset.css">
 <link rel="stylesheet" type="text/css" href="css/result.css">
-<link rel="stylesheet" type="text/css" href="css/transition.css">
+  <link rel="stylesheet" type="text/css" href="css/header.css">
+  <link rel="stylesheet" type="text/css" href="css/transition.css">
 <title>リザルトページ</title>
 </head>
 <body>
+<jsp:include page="header.jsp" />
 	<section class="result">
 	
 		<div class="result_inner">
@@ -56,8 +58,12 @@
 %>
 		</table>
 	</div>
+	<div class="ranking">
+		<div class="ranking-link">
+			<a href="./ranking" title="ランキング">RANKING</a>
+		</div>
+	</div>
 	
-	<a href="./mypage">ユーザーページへ</a>
-	<a href="./top">もう一度プレイ</a>
+<jsp:include page="transition.jsp" />
 </body>
 </html>

@@ -36,6 +36,7 @@
                 </table>
 		    </form>
         </div>
+        <a href="./join">新規登録</a>
     </main>
 </body>
 </html>

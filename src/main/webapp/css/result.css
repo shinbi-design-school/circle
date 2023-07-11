@@ -1,6 +1,12 @@
 @charset "UTF-8";
 
 /* リザルト========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@200;700&display=swap');
+
+body {
+	background-color: #0c162a;
+	font-family: 'M PLUS 1', sans-serif;
+}
 
 .result {
   background-image: url(../images/result.jpg);
@@ -15,7 +21,8 @@
 
 .result::after {
   content: "";
-  background-color: black;
+/*  background-color: black;*/
+  background-image:repeating-linear-gradient(#000, #000 2px, #111 2px, #111 4px);
   opacity: 0.5;
   position: absolute;
   top: 0;
@@ -39,6 +46,7 @@
 
 .result_title {
   text-transform: uppercase;
+  text-shadow: 0px 2px 1px black;
   font-weight: bold;
   font-size: 56px;
   color: #F2B10C;
@@ -85,10 +93,16 @@
 }
 
 .result_table {
+  color: white;
   margin: 70px auto 0;
   width: fit-content;
   z-index: 10;
+}
 
+.result_table tr {
+	border-color: white;
+	border-top: 1px;
+	border-bottom: 1px;
 }
 
 .result_head {
@@ -112,8 +126,32 @@
   color: red;
 }
 
+.ranking {
+	margin: 50px auto;	
+	width: fit-content;
+	position: relative;
+}
 
+.ranking-link {
+	text-align: center;
+}
 
+.ranking-link a {
+	color: white;
+	font-size: 24px;
+	font-style: italic;
+}
 
+.ranking-link::after {
+	content: "";
+	background-color: black;
+	border-radius: 5px;
+	width: 115px;
+	height: 30px;
+	left: 0px;
+	bottom: 0px;
+	position: absolute;
+	z-index: -10;
+}
 
 /* リザルト========================================================== */
