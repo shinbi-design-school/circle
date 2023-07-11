@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.design_shinbi.circle.model.Const;
 import com.design_shinbi.circle.model.dao.UserDAO;
@@ -200,4 +201,17 @@ public class UserServlet extends HttpServlet {
 		return jsp;
 	}
 
+	private void setIcon(HttpServletRequest req, UserDAO dao, User entity) throws Exception {
+		Part part = req.getPart("icon_file");
+		String fileName = part.getSubmittedFileName();
+		boolean deleteFlag = Boolean.parseBoolean(req.getParameter("delete_icon_flag"));
+
+		if (fileName == null || fileName.isEmpty()) {
+			if (deleteFlag) {
+				dao.removeIcon(entity.getId());
+			}
+		} else {
+			dao.setIcon(entity.getId(), fileName, part.getInputStream());
+		}
+	}
 }

@@ -31,7 +31,7 @@
                         <td><input type="password" name="password"></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" value="ログイン" id="submit"</td>
+                        <td><input type="submit" value="ログイン" id="submit"></td>
                     </tr>
                 </table>
 		    </form>
