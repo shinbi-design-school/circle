@@ -54,27 +54,27 @@ public class AddUserServlet extends HttpServlet{
 	
 			String email = req.getParameter("email");
 			if (email == null || email.isEmpty()) {
-				error = "メールアドレスを入力してください。";
+				error = "メールアドレスを入力してください。<br>";
 			} else {
 				User user = dao.findByEmail(email);
 				if (user != null) {
-					error = "そのメールアドレスは既に使われています。";
+					error = "そのメールアドレスは既に使われています。<br>";
 				}
 			}
 			
 			String name = req.getParameter("name");
 			if (name == null || name.isEmpty()) {
-				error += "名前を入力してください。";
+				error += "名前を入力してください。<br>";
 			}
 			
 			String password = req.getParameter("password");
 			if (password == null || password.isEmpty()) {
-				error += "パスワードを入力してください。";
+				error += "パスワードを入力してください。<br>";
 			}
 
 			String confirmed = req.getParameter("confirmed");
 			if (!password.equals(confirmed)) {
-				error += "パスワードが一致しません。";
+				error += "パスワードが一致しません。<br>";
 			}
 
 			if (!error.isEmpty()) {
@@ -90,7 +90,7 @@ public class AddUserServlet extends HttpServlet{
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			error += "システムエラー";
+			error += "システムエラー<br>";
 		}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/join.jsp");

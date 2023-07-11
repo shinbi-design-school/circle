@@ -18,38 +18,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>アカウント作成</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/join.css">
+	<script src="./js/analyzer_animation.js"></script>
+	<title>アカウント作成</title>
 </head>
 <body>
-<%
-	if (error != null){
-%>
-	<h3 class="error-message"><%=error %></h3>
-<%		
-	}
-%>
-	<form action="join" method="POST">
-		<tr>
-		    <th>ニックネーム</th>
-		    <td><input type="text" name="name" maxvalue="15" <%=name %>></td>
-		</tr>
-		<tr>
-		    <th>メールアドレス</th>
-		    <td><input type="email" name="email" <%=email %>></td>
-		</tr>
-		<tr>
-		    <th>パスワード</th>
-		    <td><input type="password" name="password"></td>
-		</tr>
-		<tr>
-		    <th>パスワード確認</th>
-		    <td><input type="password" name="confirmed"></td>
-		</tr>
-		<tr>
-		    <td><input type="submit" value="アカウント作成"</td>
-		</tr>
-	</form>
-
+	<main>
+		<div class="image">
+			<canvas class="analyzer"></canvas>
+		</div>
+		<div class="info">
+			<h1>Circle</h1>
+			<h2>新規登録</h2>
+			<div class="error_container">
+		<%
+			if (error != null){
+		%>
+			<h3 class="error-message"><%=error %></h3>
+		<%		
+			}
+		%>
+			</div>
+			<div class="form_container">
+				<form action="join" method="POST">
+					<table>
+						<tr>
+						    <th>ハンドルネーム</th>
+						    <td><input type="text" name="name" maxvalue="15" <%=name %> required></td>
+						</tr>
+						<tr>
+						    <th>メールアドレス</th>
+						    <td><input type="email" name="email" <%=email %> required></td>
+						</tr>
+						<tr>
+						    <th>パスワード</th>
+						    <td><input type="password" name="password" required></td>
+						</tr>
+						<tr>
+						    <th>パスワード確認</th>
+						    <td><input type="password" name="confirmed" required></td>
+						</tr>
+					</table>
+						<input type="submit" value="確定" class="submit_button">
+						
+				</form>
+			</div>
+		</div>
+	</main>
 </body>
 </html>
