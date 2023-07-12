@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.design_shinbi.circle.model.entity.User" %>
+<%@ page import="com.design_shinbi.circle.model.Const" %>
+
+<%
+	User user = (User)session.getAttribute(Const.LOGIN_USER_KEY);
+	String fileName = user.getIconFileName();
+%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -26,7 +32,7 @@
 <%
     if(fileName != null && !fileName.isEmpty()) {
 %>
-        <img src="img?id=<%= uesr.getId() %>">
+        <img src="img?id=<%= user.getId() %>">
 <%
     }
 %>
