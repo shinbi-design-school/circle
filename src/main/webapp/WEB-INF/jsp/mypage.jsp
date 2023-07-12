@@ -6,7 +6,9 @@
 
 <%
 	User user = (User)session.getAttribute(Const.LOGIN_USER_KEY);
-	String fileName = user.getIconFileName();
+	if (user != null){
+		String fileName = user.getIconFileName();		
+	}
 %>
 
 <!DOCTYPE html>
