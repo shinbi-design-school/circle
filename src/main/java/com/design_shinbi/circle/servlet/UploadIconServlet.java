@@ -15,8 +15,8 @@ import com.design_shinbi.circle.model.Const;
 import com.design_shinbi.circle.model.dao.UserDAO;
 import com.design_shinbi.circle.model.entity.User;
 
-@WebServlet("/user")
-public class UserServlet extends HttpServlet {
+@WebServlet("/upload")
+public class UploadIconServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,9 @@ public class UserServlet extends HttpServlet {
 		dispatcher.forward(request, reaponse);
 	}
 
-	private void setIcon(HttpServletRequest req, UserDAO dao, User entity) throws Exception {
+	private void setIcon(HttpServletRequest req, UserDAO dao, User entity)
+			throws Exception {
+
 		Part part = req.getPart("icon_file");
 		String fileName = part.getSubmittedFileName();
 		boolean deleteFlag = Boolean.parseBoolean(req.getParameter("delete_icon_flag"));
@@ -54,4 +56,10 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+
+		req.getParameter("icon_file");
+
+	}
 }

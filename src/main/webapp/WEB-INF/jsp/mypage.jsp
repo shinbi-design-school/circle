@@ -24,14 +24,6 @@
 <body>
     <h1 class="mypage_title">INFORMATION</h1>
     <div class="mypage_information_container">
-        <form id="new_icon_form" method="post" action="user">
-        <div>
-            <div id="icon_file_name"></div>
-            <input id="user_icon_file" type="file" name="icon_file">
-            <a href="javascript:removeIcon()">
-                <span class="icon_red fas fa-times_circle"></span>
-            </a>
-        </div>
 <%
     if(fileName != null && !fileName.isEmpty()) {
 %>
@@ -39,6 +31,14 @@
 <%
     }
 %>
+        <form id="new_icon_form" method="post" action="upload" enctype="multipart/form-data">
+        <div>
+            <div id="icon_file_name"></div>
+            <input id="user_icon_file" type="file" name="icon_file">
+            <a href="javascript:removeIcon()">
+                <span class="icon_red fas fa-times_circle"></span>
+            </a>
+        </div>
         <div>
             <input id="submit" type="submit" name="submit" value="編集">
         </div>
