@@ -18,6 +18,7 @@
 <link rel="stylesheet" type="text/css" href="css/result.css">
   <link rel="stylesheet" type="text/css" href="css/header.css">
   <link rel="stylesheet" type="text/css" href="css/transition.css">
+  <script src="./js/stuffed_roll.js"></script>
 <title>リザルトページ</title>
 </head>
 <body>
@@ -62,6 +63,12 @@
 		<div class="ranking-link">
 			<a href="./ranking" title="ランキング">RANKING</a>
 		</div>
+	</div>
+	
+	<div class="stuffed-roll">
+		<div class="intro-mv">
+    		<video autoplay muted loop src="movie/stuffed-roll.mp4" class="stuffed-roll-mv mv-hidden"></video>
+  		</div>
 	</div>
 	
 <jsp:include page="transition.jsp" />
