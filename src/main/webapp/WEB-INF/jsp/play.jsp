@@ -19,6 +19,7 @@
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/play.css">
   <script defer src="js/judgement.js"></script>
+  <script type="module" src="js/paricles.js"></script>
   <title>プレイ画面</title>
   <style>
 
@@ -65,15 +66,16 @@
         </ul>
       </div>
     </div>
+  <canvas class="particles"></canvas>
   </main>
-<!--
+<%--
   <div class="play-await">
     <img src="./images/question.png" alt="">
   </div>
   <div class="play-start">
     <img src="./images/quiz.png" alt="">
   </div>
--->
+--%>
   <div class="correct-image judgement-image">
     <img src="./images/maru.png" alt="">
   </div>
