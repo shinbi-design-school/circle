@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,7 +16,7 @@ import com.design_shinbi.circle.model.Quiz;
 import com.design_shinbi.circle.model.Ranking;
 
 @WebServlet("/advance")
-public class QuizServletAdvance extends HttpServlet{
+public class QuizServletAdvance extends BaseServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
