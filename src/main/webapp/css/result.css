@@ -154,4 +154,94 @@ body {
 	z-index: -10;
 }
 
+.mv-hidden {
+  display: none;
+}
+
+.stuffed-roll {
+	width: 100px;
+	height: 100px;
+	background-color: black;
+	position: fixed;
+	right: 5vw;
+	bottom: 3vh;
+	border-radius: 50%;
+}
+
+.stuffed-roll::after{
+	position: absolute;
+	text-align: center;
+	content: "Presented by 3G.";
+	color: white;
+	font-weight: bold;
+	top: 25%;
+}
+
+.stuffed-roll-play {
+	animation-name: zoomin;
+	animation-duration: 0.8s;
+	animation-timing-function: easeOut;
+	animation-fill-mode: forwards;
+	background-color: black;
+	position: fixed;
+	right: 5vw;
+	bottom: 3vh;
+	z-index: +500;
+}
+@keyframes zoomin{
+	0% {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+	}
+	20% {
+		border-radius: 0;
+	}
+	100% {
+		width: 90vw;
+		height: 90vh;
+	}
+}
+
+.stuffed-roll-stop {
+	animation-name: zoomout;
+	animation-duration: 0.8s;
+	animation-timing-function: easeOut;
+	animation-fill-mode: forwards;
+	background-color: black;
+	position: fixed;
+	right: 5vw;
+	bottom: 3vh;
+	border-radius: 50%;
+	z-index: +500;
+}
+@keyframes zoomout{
+	0% {
+		width: 90vw;
+		height: 90vh;
+		border-radius: 0;
+	}
+	80% {
+		border-radius: 0;
+	}
+	100% {
+		width: 100px;
+		height: 100px;
+	}
+}
+
+.intro-mv {
+	margin: 0px;
+	text-align: center;
+	padding: 20px;
+	max-width: 100%;
+	max-height: 100%;
+	height: 100%;
+}
+
+.stuffed-roll-mv {
+	max-width: 100%;
+	max-height: 100%;
+}
+
 /* リザルト========================================================== */
