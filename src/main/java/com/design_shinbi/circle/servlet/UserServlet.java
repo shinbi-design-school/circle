@@ -45,9 +45,9 @@ public class UserServlet extends HttpServlet {
 				jsp = operate(request, loginUser);
 			} catch (Exception e) {
 				throw new ServletException(e);
-			}
 		}
-
+		}
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
 		dispatcher.forward(request, reaponse);
 	}

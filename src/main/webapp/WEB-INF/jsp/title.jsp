@@ -25,6 +25,12 @@
     <button class="start-button" onclick="">
       <img src="images/start-button.png" alt="スタートボタン" class="start-button-link">
     </button>
+    <div class="mypage-link-container">
+	    <div class="mypage-link">
+		    <a href="./user">Home
+		    </a>
+	    </div>
+    </div>
   </div>
 </body>
 
