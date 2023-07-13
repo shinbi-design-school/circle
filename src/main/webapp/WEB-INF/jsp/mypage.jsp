@@ -16,20 +16,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/mypage.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+  	<link rel="stylesheet" type="text/css" href="css/transition.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>user</title>
 </head>
 <body>
+<jsp:include page="header.jsp" />
     <h1 class="mypage_title">INFORMATION</h1>
     <div class="mypage_information_container">
 <%
     if(iconFileName != null && !iconFileName.isEmpty()) {
 %>
-        <img src="icon?id=<%= user.getId() %>">
+        <img class="mypage_icon" src="icon?id=<%= user.getId() %>">
 <%
     } else {
 %>
-		<img src="./images/icon.jpeg">
+		<img class="mypage_default_icon" src="./images/icon.jpeg">
 <%
     }
 %>

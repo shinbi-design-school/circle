@@ -27,28 +27,27 @@ public class UserServlet extends BaseServlet {
 		User loginUser = (User) session.getAttribute(Const.LOGIN_USER_KEY);
 
 		String jsp = null;
+		jsp = "/WEB-INF/jsp/mypage.jsp";
 		if (loginUser == null) {
 			jsp = "/WEB-INF/jsp/login.jsp";
 		}
-
-		jsp = "/WEB-INF/jsp/mypage.jsp";
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
 		dispatcher.forward(request, reaponse);
 	}
 
-//	private void setIcon(HttpServletRequest req, UserDAO dao, User entity) throws Exception {
-//		Part part = req.getPart("icon_file");
-//		String fileName = part.getSubmittedFileName();
-//		boolean deleteFlag = Boolean.parseBoolean(req.getParameter("delete_icon_flag"));
-//
-//		if (fileName == null || fileName.isEmpty()) {
-//			if (deleteFlag) {
-//				dao.removeIcon(entity.getId());
-//			}
-//		} else {
-//			dao.setIcon(entity.getId(), fileName, part.getInputStream());
-//		}
-//	}
+	//	private void setIcon(HttpServletRequest req, UserDAO dao, User entity) throws Exception {
+	//		Part part = req.getPart("icon_file");
+	//		String fileName = part.getSubmittedFileName();
+	//		boolean deleteFlag = Boolean.parseBoolean(req.getParameter("delete_icon_flag"));
+	//
+	//		if (fileName == null || fileName.isEmpty()) {
+	//			if (deleteFlag) {
+	//				dao.removeIcon(entity.getId());
+	//			}
+	//		} else {
+	//			dao.setIcon(entity.getId(), fileName, part.getInputStream());
+	//		}
+	//	}
 
 }

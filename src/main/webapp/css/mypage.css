@@ -14,8 +14,14 @@
     text-align: center;
 }
 
-.mypage_icon img {
+.mypage_icon {
     width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.mypage_default_icon {
+	width: 150px;
     height: auto;
     border-radius: 50%;
 }
