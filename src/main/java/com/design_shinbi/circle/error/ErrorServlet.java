@@ -2,7 +2,6 @@ package com.design_shinbi.circle.error;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +17,6 @@ public class ErrorServlet extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		HttpSession session = req.getSession();
 		User loginUser = (User) session.getAttribute(Const.LOGIN_USER_KEY);
 
@@ -26,16 +24,16 @@ public class ErrorServlet extends HttpServlet{
 //		FileNotFoundException error = new FileNotFoundException("指定されたページが存在しません。");
 		String error = "404";
 		
-		String jsp = null;
+		String url = null;
 		
 		if (loginUser == null) {
-			jsp = "/WEB-INF/jsp/login.jsp";
+			url = "/circle/login";
 		} else {
 			req.setAttribute("status", error);
-			jsp = "/WEB-INF/jsp/error.jsp";
+			url = "/circle/top";
 		}
-		RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);
-		dispatcher.forward(req, resp);
+		
+		resp.sendRedirect(url);
 	}
 	
 }
