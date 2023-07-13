@@ -1,7 +1,10 @@
 @charset "utf-8";
 
 .mypage_title {
+	text-transform: uppercase;
+  	font-style: italic;
     text-align: center;
+    font-size: 56px;
 }
 
 .mypage_information_container {
@@ -14,14 +17,8 @@
     text-align: center;
 }
 
-.mypage_icon {
-    width: 150px;
-    height: auto;
-    border-radius: 50%;
-}
-
-.mypage_default_icon {
-	width: 150px;
+.mypage_icon_image {
+    width: 200px;
     height: auto;
     border-radius: 50%;
 }

@@ -15,8 +15,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/mypage.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="css/mypage.css">
     <link rel="stylesheet" type="text/css" href="css/header.css">
   	<link rel="stylesheet" type="text/css" href="css/transition.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,31 +24,18 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
-    <h1 class="mypage_title">INFORMATION</h1>
+<h1 class="mypage_title">INFORMATION</h1>
     <div class="mypage_information_container">
-<%
-    if(iconFileName != null && !iconFileName.isEmpty()) {
-%>
-        <img class="mypage_icon" src="icon?id=<%= user.getId() %>">
-<%
-    } else {
-%>
-		<img class="mypage_default_icon" src="./images/icon.jpeg">
-<%
-    }
-%>
-	
+    <div class="mypage_icon">
         <form id="new_icon_form" method="post" action="upload" enctype="multipart/form-data">
-        <div>
+        <img class="mypage_icon_image" src="icon?id=<%= user.getId() %>">
             <div id="icon_file_name"></div>
             <input id="user_icon_file" type="file" name="icon_file">
             <a href="javascript:removeIcon()">
                 <span class="icon_red fas fa-times_circle"></span>
             </a>
-        </div>
-        <div>
-            <input id="submit" type="submit" name="submit" value="編集">
-        </div>
+            <input id="submit" type="submit" name="submit" value="更新">
+    </div>
         <input type="hidden" name="id" vale="<%= user.getId() %>">
         <input type="hidden" name="delete_icon_flag" value="false">
         </form>
