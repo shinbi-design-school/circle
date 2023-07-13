@@ -1,5 +1,7 @@
 package com.design_shinbi.circle.servlet;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -40,6 +42,16 @@ public class IconServlet extends BaseServlet {
 				while ((length = stream.read(buffer)) > 0) {
 					resp.getOutputStream().write(buffer, 0, length);
 				}
+			} else {
+				resp.setContentType("icon/png");
+				byte[] buffer = new byte[1024];
+				
+				File file = new File(req.getServletContext().getRealPath("./images/icon.jpeg"));
+				FileInputStream r = new FileInputStream(file);
+				while (r.read(buffer) > 0) {
+					resp.getOutputStream().write(buffer);
+			    }
+			    r.close();
 			}
 			connection.close();
 		} catch (Exception e) {

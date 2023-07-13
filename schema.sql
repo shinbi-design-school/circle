@@ -17,12 +17,12 @@ CREATE TABLE questions
 (
 	id int NOT NULL AUTO_INCREMENT,
 	sentence text NOT NULL,
+	genre varchar(64) NOT NULL,
 	correct text NOT NULL,
 	choice2 text NOT NULL,
 	choice3 text NOT NULL,
 	choice4 text NOT NULL,
 	imagec mediumblob,
-	genre varchar(64) NOT NULL,
 	image2 mediumblob,
 	image3 mediumblob,
 	image4 mediumblob,
