@@ -270,8 +270,8 @@ public class UserDAO {
 			throws SQLException {
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 
-		String sql = "UPDATE users SET icon_file_name = ?, image = ?,"
-				+ "update_at = ? WHERE id = ?";
+		String sql = "UPDATE users SET icon_file_name = ?, icon = ?,"
+				+ "updated_at = ? WHERE id = ?";
 		PreparedStatement statement = this.connection.prepareStatement(sql);
 
 		statement.setString(1, fileName);
@@ -293,7 +293,7 @@ public class UserDAO {
 		ResultSet resultSet = statement.executeQuery();
 		if (resultSet.next()) {
 			String fileName = resultSet.getString("icon_file_name");
-			Blob blob = resultSet.getBlob("image");
+			Blob blob = resultSet.getBlob("icon");
 
 			if (blob != null) {
 				icon = new Icon(fileName, blob.getBinaryStream());

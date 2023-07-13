@@ -31,7 +31,7 @@ public class IconServlet extends BaseServlet {
 				if (fileName.toLowerCase().endsWith(".png")) {
 					resp.setContentType("icon/png");
 				} else {
-					resp.setContentType("icon/png");
+					resp.setContentType("icon/jpeg");
 				}
 
 				byte[] buffer = new byte[1024];

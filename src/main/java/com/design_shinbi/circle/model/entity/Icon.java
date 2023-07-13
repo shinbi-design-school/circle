@@ -26,4 +26,5 @@ public class Icon {
 	public void setStream(InputStream stream) {
 		this.stream = stream;
 	}
+
 }

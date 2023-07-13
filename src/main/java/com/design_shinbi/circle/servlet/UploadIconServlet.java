@@ -1,9 +1,11 @@
 package com.design_shinbi.circle.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,14 +15,16 @@ import javax.servlet.http.Part;
 import com.design_shinbi.circle.model.Const;
 import com.design_shinbi.circle.model.dao.UserDAO;
 import com.design_shinbi.circle.model.entity.User;
+import com.design_shinbi.circle.util.DbUtil;
 
 @WebServlet("/upload")
+@MultipartConfig
 public class UploadIconServlet extends BaseServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void service(
+	protected void doPost(
 			HttpServletRequest request,
 			HttpServletResponse reaponse) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -29,11 +33,33 @@ public class UploadIconServlet extends BaseServlet {
 		User loginUser = (User) session.getAttribute(Const.LOGIN_USER_KEY);
 
 		String jsp = null;
+
 		if (loginUser == null) {
 			jsp = "/WEB-INF/jsp/login.jsp";
-		}
+		} else {
+			try {
+				Connection connection = DbUtil.connect();
+				UserDAO dao = new UserDAO(connection);
+				String error = "";
 
-		jsp = "/WEB-INF/jsp/mypage.jsp";
+				try {
+
+				} catch (Exception e) {
+				}
+
+				if (error.isEmpty()) {
+					User user = null;
+
+					this.setIcon(request, dao, user);
+
+				}
+				jsp = "/WEB-INF/jsp/mypage.jsp";
+
+				connection.close();
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
 		dispatcher.forward(request, reaponse);
@@ -41,7 +67,6 @@ public class UploadIconServlet extends BaseServlet {
 
 	private void setIcon(HttpServletRequest req, UserDAO dao, User entity)
 			throws Exception {
-
 		Part part = req.getPart("icon_file");
 		String fileName = part.getSubmittedFileName();
 		boolean deleteFlag = Boolean.parseBoolean(req.getParameter("delete_icon_flag"));
@@ -53,12 +78,6 @@ public class UploadIconServlet extends BaseServlet {
 		} else {
 			dao.setIcon(entity.getId(), fileName, part.getInputStream());
 		}
-	}
-
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
-		req.getParameter("icon_file");
 
 	}
 }

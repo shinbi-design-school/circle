@@ -6,10 +6,8 @@
 
 <%
 	User user = (User)session.getAttribute(Const.LOGIN_USER_KEY);
-	String fileName = "";
-	if (user != null){
-		fileName = user.getIconFileName();		
-	}
+	String iconFileName = user.getIconFileName();
+	
 %>
 
 <!DOCTYPE html>
@@ -25,7 +23,7 @@
     <h1 class="mypage_title">INFORMATION</h1>
     <div class="mypage_information_container">
 <%
-    if(fileName != null && !fileName.isEmpty()) {
+    if(iconFileName != null && !iconFileName.isEmpty()) {
 %>
         <img src="img?id=<%= user.getId() %>">
 <%
@@ -42,6 +40,7 @@
         <div>
             <input id="submit" type="submit" name="submit" value="編集">
         </div>
+        <input type="hidden" name="id" vale="<%= user.getId() %>">
         <input type="hidden" name="delete_icon_flag" value="false">
         </form>
         <div class="mypage_information_table">
@@ -91,7 +90,6 @@
             <p>100</p>
             <p>100</p>
         </div>
-    </div>
-
+</div>	
 </body>
 </html>
