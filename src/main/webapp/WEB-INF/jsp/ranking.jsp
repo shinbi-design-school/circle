@@ -42,8 +42,10 @@
 %>
         <div class="standings__row">
           <p class="standings__rank standings__rank--<%=i + 1 %>"><%=i + 1 %></p>
-          <img class="mypage_icon" src="icon?id=<%=scores.get(i).getUserId() %>">
-          <p class="standings__name"><%=scores.get(i).getUserName() %></p>
+          <div class="standings__user">
+	          <img class="standings__icon" src="icon?id=<%=scores.get(i).getUserId() %>">
+	          <p class="standings__name"><%=scores.get(i).getUserName() %></p>
+          </div>
           <p class="standings__point"><%=scores.get(i).calcScore() %></p>
         </div>
 <%
