@@ -25,10 +25,15 @@
 <%
     if(iconFileName != null && !iconFileName.isEmpty()) {
 %>
-        <img src="iconid=<%= user.getId() %>">
+        <img src="icon?id=<%= user.getId() %>">
+<%
+    } else {
+%>
+		<img src="./images/icon.jpeg">
 <%
     }
 %>
+	
         <form id="new_icon_form" method="post" action="upload" enctype="multipart/form-data">
         <div>
             <div id="icon_file_name"></div>
