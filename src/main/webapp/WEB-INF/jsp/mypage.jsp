@@ -25,7 +25,7 @@
 <%
     if(iconFileName != null && !iconFileName.isEmpty()) {
 %>
-        <img src="img?id=<%= user.getId() %>">
+        <img src="iconid=<%= user.getId() %>">
 <%
     }
 %>
