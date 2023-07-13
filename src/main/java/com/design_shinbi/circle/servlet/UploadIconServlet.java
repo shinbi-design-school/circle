@@ -41,18 +41,12 @@ public class UploadIconServlet extends BaseServlet {
 				Connection connection = DbUtil.connect();
 				UserDAO dao = new UserDAO(connection);
 
-				try {
-
-				} catch (Exception e) {
-
-					this.setIcon(request, dao, loginUser);
-				}
-
-				request.setAttribute("id", loginUser);
+				this.setIcon(request, dao, loginUser);
 
 				jsp = "/WEB-INF/jsp/mypage.jsp";
 
 				connection.close();
+
 			} catch (Exception e) {
 				throw new ServletException(e);
 			}
