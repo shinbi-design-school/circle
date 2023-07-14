@@ -77,13 +77,13 @@
   <div class="play-start">
     <img src="./images/quiz.png" alt="">
   </div>
---%>
   <div class="correct-image judgement-image">
     <img src="./images/maru.png" alt="">
   </div>
   <div class="incorrect-image judgement-image">
     <img src="./images/batu.png" alt="">
   </div>
+--%>
 </body>
 
 </html>

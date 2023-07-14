@@ -25,14 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	choiceContainer03.setAttribute('num', '2');
 	choiceContainer04.setAttribute('num', '3');
 	let token;
-	const viewCorrect = document.getElementsByClassName("correct-image")[0];
-	const viewIncorrect = document.getElementsByClassName("incorrect-image")[0];
+//	const viewCorrect = document.getElementsByClassName("correct-image")[0];
+//	const viewIncorrect = document.getElementsByClassName("incorrect-image")[0];
 	let questionNumber = 1;
 	const questionNumberContainer = document.getElementsByClassName("quiz-question-number")[0];
 	const judgementCanvas = document.getElementsByClassName("judgement-canvas")[0];
 	
-	viewCorrect.style.visibility = "hidden";
-	viewIncorrect.style.visibility = "hidden";
+//	viewCorrect.style.visibility = "hidden";
+//	viewIncorrect.style.visibility = "hidden";
 	
 	const finish = () => {
 		window.location.href = "./play";
@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			choiceContainer03.value = lines[3];
 			choiceContainer04.value = lines[4];
 			token = lines[5];
-			viewCorrect.style.visibility = "hidden";
-			viewIncorrect.style.visibility = "hidden";
+//			viewCorrect.style.visibility = "hidden";
+//			viewIncorrect.style.visibility = "hidden";
 			judgementCanvas.className = "judgement-canvas canvas-hidden";
 			
 			questionNumberContainer.textContent = `問題${questionNumber++}`;
@@ -97,12 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			let lines = text.split(/\r?\n/);
 			
 			if ( lines[0] === 'correct' ){
-				viewCorrect.style.visibility = "visible";
-				viewIncorrect.style.visibility = "hidden";
+//				viewCorrect.style.visibility = "visible";
+//				viewIncorrect.style.visibility = "hidden";
 				judgementCanvas.className = "judgement-canvas canvas-correct";
 			} else if ( lines[0] === 'incorrect' ) {
-				viewCorrect.style.visibility = "hidden";
-				viewIncorrect.style.visibility = "visible";
+//				viewCorrect.style.visibility = "hidden";
+//				viewIncorrect.style.visibility = "visible";
 				judgementCanvas.className = "judgement-canvas canvas-incorrect";
 			}
 			
