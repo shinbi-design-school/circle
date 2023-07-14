@@ -259,4 +259,20 @@ input[type=radio]:checked+span {
 	z-index: 100;
 }
 
+.judgement-canvas {
+	position: absolute;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 500;
+}
+.canvas-hidden {
+	visibility: hidden;
+	z-index: -9999;		
+}
+.canvas-correct .canvas-incorrect{
+	visibility: visible;
+}
 /* プレイ画面========================================================== */

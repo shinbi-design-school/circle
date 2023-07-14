@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const viewIncorrect = document.getElementsByClassName("incorrect-image")[0];
 	let questionNumber = 1;
 	const questionNumberContainer = document.getElementsByClassName("quiz-question-number")[0];
+	const judgementCanvas = document.getElementsByClassName("judgement-canvas")[0];
 	
 	viewCorrect.style.visibility = "hidden";
 	viewIncorrect.style.visibility = "hidden";
@@ -57,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			token = lines[5];
 			viewCorrect.style.visibility = "hidden";
 			viewIncorrect.style.visibility = "hidden";
+			judgementCanvas.className = "judgement-canvas canvas-hidden";
+			
 			questionNumberContainer.textContent = `問題${questionNumber++}`;
 			
 			choiceContainer01.onclick = "";
@@ -96,9 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			if ( lines[0] === 'correct' ){
 				viewCorrect.style.visibility = "visible";
 				viewIncorrect.style.visibility = "hidden";
+				judgementCanvas.className = "judgement-canvas canvas-correct";
 			} else if ( lines[0] === 'incorrect' ) {
 				viewCorrect.style.visibility = "hidden";
 				viewIncorrect.style.visibility = "visible";
+				judgementCanvas.className = "judgement-canvas canvas-incorrect";
 			}
 			
 			if (lines.length > 1 && lines[1] === "finish"){

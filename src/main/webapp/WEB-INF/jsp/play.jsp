@@ -19,6 +19,7 @@
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/play.css">
   <script defer src="js/judgement.js"></script>
+  <script type="module" src="js/judgementViewer.js"></script>
   <script type="module" src="js/paricles.js"></script>
   <title>プレイ画面</title>
   <style>
@@ -67,6 +68,7 @@
       </div>
     </div>
   <canvas class="particles"></canvas>
+  <canvas class="judgement-canvas canvas-hidden"></canvas>
   </main>
 <%--
   <div class="play-await">
