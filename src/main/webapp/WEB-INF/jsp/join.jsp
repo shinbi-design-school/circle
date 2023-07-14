@@ -22,7 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/join.css">
 	<script src="./js/analyzer_animation.js"></script>
-	<title>アカウント作成</title>
+	<title>新規登録</title>
 </head>
 <body>
 	<main>

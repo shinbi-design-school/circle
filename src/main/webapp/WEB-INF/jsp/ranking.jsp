@@ -23,7 +23,7 @@
   <link rel="stylesheet" type="text/css" href="css/standings.css">
   <link rel="stylesheet" type="text/css" href="css/header.css">
   <link rel="stylesheet" type="text/css" href="css/transition.css">
-  <title>プレイヤーランキング</title>
+  <title>Circle Standings</title>
 </head>
 
 <body>

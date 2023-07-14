@@ -21,7 +21,7 @@
   <script defer src="js/judgement.js"></script>
   <script type="module" src="js/judgementViewer.js"></script>
   <script type="module" src="js/paricles.js"></script>
-  <title>プレイ画面</title>
+  <title>Circle</title>
   <style>
 
 

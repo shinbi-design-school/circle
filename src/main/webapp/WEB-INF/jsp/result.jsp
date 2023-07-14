@@ -19,7 +19,7 @@
   <link rel="stylesheet" type="text/css" href="css/header.css">
   <link rel="stylesheet" type="text/css" href="css/transition.css">
   <script src="./js/stuffed_roll.js"></script>
-<title>リザルトページ</title>
+<title>リザルト</title>
 </head>
 <body>
 <jsp:include page="header.jsp" />
@@ -44,7 +44,7 @@
 	</section>
 	
 	<div class="result_table">
-		<p class="result_head">プレイ履歴</p>
+		<p class="result_head">回答履歴</p>
 		<table>
 <%
 	for (Question question : quiz.getQuestions()){
