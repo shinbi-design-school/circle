@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -93,7 +92,9 @@ public class QuizDAO {
 		while (rs.next()) {
 			String score = String.valueOf(rs.getInt("score"));
 			LocalDateTime timestamp = rs.getTimestamp("created_at").toLocalDateTime();
-			String timestampStr = timestamp.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL));
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("y年M月d日 (E) H時m分s秒");
+			String timestampStr = dtf.format(timestamp);
 
 			HashMap<String,String> row = new HashMap<String,String>(){
 				{
