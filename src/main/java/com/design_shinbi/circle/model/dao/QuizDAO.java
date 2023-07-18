@@ -80,7 +80,7 @@ public class QuizDAO {
 	
 	public List<HashMap<String, String>> getPlayLog(int userId, int limit) throws SQLException {
 		
-		String sql = "SELECT score, created_at FROM result WHERE user_id = ? ORDER BY created_at LIMIT ?";
+		String sql = "SELECT score, created_at FROM result WHERE user_id = ? ORDER BY created_at DESC LIMIT ?";
 		
 		PreparedStatement statement = this.connection.prepareStatement(sql);
 		statement.setInt(1, userId);

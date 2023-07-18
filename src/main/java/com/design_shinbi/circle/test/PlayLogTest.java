@@ -23,7 +23,7 @@ class PlayLogTest {
 			List<HashMap<String, String>> logs = quizDao.getPlayLog(testUser, 5);
 			
 			for (HashMap<String, String> row : logs) {
-				System.out.printf("スコア：%s　、　日時：%s",row.get("score"), row.get("timestamp"));
+				System.out.printf("スコア：%s　、　日時：%s\n",row.get("score"), row.get("timestamp"));
 			}
 		
 		} catch (Exception e) {
