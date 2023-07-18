@@ -9,6 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/circle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +20,7 @@
 <body class="login-page">
 	<main>
         <div class="login-page-container">
-            <h1>ログイン</h1>
+            <h1>Circle</h1>
 		    <form action="login" method="POST">
                 <table id="login">
                     <tr>
@@ -36,7 +37,9 @@
                 </table>
 		    </form>
         </div>
-        <a href="./join">新規登録</a>
+        <div class="join-link">
+	        <a href="./join">新規登録</a>
+        </div>
     </main>
 </body>
 </html>
