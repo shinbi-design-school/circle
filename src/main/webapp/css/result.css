@@ -74,10 +74,10 @@ body {
 
 }
 
-.result_text {
-  
+/*.result_text {*/
 
-}
+/*}*/
+
 .result_correct {
   font-size: 32px;
   font-weight: bold;
@@ -167,6 +167,11 @@ body {
 	right: 5vw;
 	bottom: 3vh;
 	border-radius: 50%;
+}
+
+.stuffed-roll:hover{
+	cursor: pointer;
+	cursor: hand;
 }
 
 .stuffed-roll::after{
