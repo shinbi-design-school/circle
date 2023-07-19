@@ -62,7 +62,7 @@ public class UserServlet extends BaseServlet {
 		}
 
 		if (jsp == null) {
-			jsp = "/WEB-INF/jsp/mypage.jsp";
+			jsp = "/WEB-INF/jsp/editUser.jsp";
 		}
 
 		return jsp;
