@@ -3,10 +3,18 @@
     
 <%@ page import="com.design_shinbi.circle.model.entity.User" %>
 <%@ page import="com.design_shinbi.circle.model.Const" %>
+<%@ page import="com.design_shinbi.circle.model.Ranking" %>
+<%@ page import="java.util.List" %>
+<%@ page import="javax.servlet.ServletContext" %>
+<%@ page import="com.design_shinbi.circle.model.Quiz" %>
 
 <%
 	User user = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 	String iconFileName = user.getIconFileName();
+	Ranking ranking = (Ranking)application.getAttribute("ranking");
+	List<Quiz> scores = ranking.getScores();
+	
+	int view = 5;
 %>
 
 <!DOCTYPE html>
@@ -87,17 +95,13 @@ $(function() {
 <%
 	for (int i = 0; i < view; i++){
 %>
-        <div class="standings__row">
-          <p class="standings__rank standings__rank--<%=i + 1 %>"><%=i + 1 %></p>
-          <div class="standings__user">
-	          <img class="standings__icon" src="icon?id=<%=scores.get(i).getUserId() %>">
-	          <p class="standings__name"><%=scores.get(i).getUserName() %></p>
-          </div>
-          <p class="standings__point"><%=scores.get(i).calcScore() %></p>
-        </div>
-<%
-	}
-%>        
+					<table>
+							<tr>
+								<th class="mypage_ranking<%=i + 1 %>"><%=i + 1 %>></th>
+								<th></th>
+							</tr
+					</table>
+		
 	        </div>
 	    </div>
 	</div>
