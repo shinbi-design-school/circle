@@ -32,7 +32,7 @@ public class UserServlet extends BaseServlet {
 		User loginUser = (User) session.getAttribute(Const.LOGIN_USER_KEY);
 
 		String jsp = null;
-		jsp = "/WEB-INF/jsp/editUser.jsp";
+		jsp = "/WEB-INF/jsp/mypage.jsp";
 		if (loginUser == null) {
 			jsp = "/WEB-INF/jsp/login.jsp";
 		} else {
