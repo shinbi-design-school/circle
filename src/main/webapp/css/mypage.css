@@ -1,5 +1,14 @@
 @charset "utf-8";
 
+.mypage {
+	background-image: url(../images/mypage.png);
+	background-repeat: no-repeat;
+  	background-size: cover;
+  	width: 100%;
+  	height: 100%;
+  	padding: 50px 0;
+}
+
 .mypage_title {
 	text-transform: uppercase;
   	font-style: italic;
@@ -19,8 +28,45 @@
 
 .mypage_icon_image {
     width: 200px;
-    height: auto;
+    height: 200px;
     border-radius: 50%;
+}
+
+.photo_icon {
+	background-color: seagreen;
+	color: white;
+	border: 2px solid seagreen;
+	border-radius: 3em;
+	padding: 12px 9px;
+	margin: 10px;
+	display: inline-block;
+}
+
+.photo_icon:hover {
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+#user_icon_file {
+	display: none;
+}
+
+.change_icon {
+	background-color: coral;
+	color: white;
+	border: 2px solid coral;
+	border-radius: 3em;
+	padding: 12px 9px;
+	display: inline-block;
+}
+
+.change_icon:hover {
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+#submit {
+	display: none;
 }
 
 .mypage_information_table {
@@ -28,8 +74,12 @@
 }
 
 .mypage_information_table table {
-    height: 200px;
     text-align: left;
+    margin-top: 30px;
+}
+
+.mypage_information_table tr {
+	line-height: 50px;
 }
 
 .mypage_container {

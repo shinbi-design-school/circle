@@ -1,6 +1,9 @@
 package com.design_shinbi.circle.servlet;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.design_shinbi.circle.model.Const;
+import com.design_shinbi.circle.model.dao.UserDAO;
 import com.design_shinbi.circle.model.entity.User;
+import com.design_shinbi.circle.util.DbUtil;
 
 @WebServlet("/user")
 public class UserServlet extends BaseServlet {
@@ -36,18 +41,67 @@ public class UserServlet extends BaseServlet {
 		dispatcher.forward(request, reaponse);
 	}
 
-	//	private void setIcon(HttpServletRequest req, UserDAO dao, User entity) throws Exception {
-	//		Part part = req.getPart("icon_file");
-	//		String fileName = part.getSubmittedFileName();
-	//		boolean deleteFlag = Boolean.parseBoolean(req.getParameter("delete_icon_flag"));
-	//
-	//		if (fileName == null || fileName.isEmpty()) {
-	//			if (deleteFlag) {
-	//				dao.removeIcon(entity.getId());
-	//			}
-	//		} else {
-	//			dao.setIcon(entity.getId(), fileName, part.getInputStream());
-	//		}
-	//	}
+	private String operate(HttpServletRequest request, User loginUser)
+			throws Exception {
+		String jsp = null;
+		Connection connection = DbUtil.connect();
+		String operation = request.getParameter("operation");
+		UserDAO dao = new UserDAO(connection);
+		if (operation != null) {
+			if (operation.equals("edit")) {
+				jsp = editUser(request, dao);
+			} else if (operation.equals("update")) {
+				jsp = updateUser(request, dao);
+			}
+		}
 
+		return jsp;
+	}
+
+	private String editUser(HttpServletRequest request, UserDAO dao)
+			throws NumberFormatException, SQLException {
+		String id = request.getParameter("id");
+		User user = dao.findById(Integer.parseInt(id));
+		request.setAttribute("user", user);
+		String jsp = "/WEB-INF/jsp/mypage.jsp";
+
+		return jsp;
+	}
+
+	private String updateUser(HttpServletRequest request, UserDAO dao)
+			throws SQLException, NoSuchAlgorithmException {
+		String jsp = null;
+		String error = "";
+
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		String name = request.getParameter("name");
+		if (name == null || name.isEmpty()) {
+			error += "名前を入力してください。";
+		}
+
+		String isAdmin = request.getParameter("is_admin");
+
+		String password = request.getParameter("password");
+		String confirmed = request.getParameter("confirmed");
+
+		if (!password.equals(confirmed)) {
+			error += "パスワードが一致しません。";
+		}
+
+		if (error.isEmpty()) {
+			dao.updateUser(id, name, Boolean.parseBoolean(isAdmin));
+			if (!password.isEmpty()) {
+				dao.updatePassword(id, password);
+			}
+			jsp = this.getList(request, dao);
+		} else {
+			User user = dao.findById(id);
+			request.setAttribute("user", user);
+			request.setAttribute("error", error);
+			jsp = "/WEB-INF/jsp/mypage.jsp";
+		}
+
+		return jsp;
+	}
 }
