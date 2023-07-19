@@ -59,6 +59,15 @@
 				<input type="hidden" name="id" value="<%= user.getId() %>">
 				<input type="hidden" name="operation" value="update">
 			</form>
+<%
+	if(error != null) {
+%>
+		<div id="error">
+			<%= error %>
+		</div>
+<%
+	}
+%>
 		</main>
 	</body>
 </html>	
