@@ -55,7 +55,8 @@ public class UserServlet extends BaseServlet {
 		UserDAO dao = new UserDAO(connection);
 		if (operation != null) {
 			if (operation.equals("edit")) {
-				jsp = editUser(request, dao);
+//				jsp = editUser(request, dao);
+				jsp = "/WEB-INF/jsp/editUser.jsp";
 			} else if (operation.equals("update")) {
 				jsp = updateUser(request, dao);
 			}
@@ -68,15 +69,15 @@ public class UserServlet extends BaseServlet {
 		return jsp;
 	}
 
-	private String editUser(HttpServletRequest request, UserDAO dao)
-			throws NumberFormatException, SQLException {
-		String id = request.getParameter("id");
-		User user = dao.findById(Integer.parseInt(id));
-		request.setAttribute("user", user);
-		String jsp = "/WEB-INF/jsp/mypage.jsp";
-
-		return jsp;
-	}
+//	private String editUser(HttpServletRequest request, UserDAO dao)
+//			throws NumberFormatException, SQLException {
+//		String id = request.getParameter("id");
+//		User user = dao.findById(Integer.parseInt(id));
+//		request.setAttribute("user", user);
+//		String jsp = "/WEB-INF/jsp/mypage.jsp";
+//
+//		return jsp;
+//	}
 
 	private String updateUser(HttpServletRequest request, UserDAO dao)
 			throws SQLException, NoSuchAlgorithmException {
