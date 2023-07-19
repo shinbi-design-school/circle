@@ -64,8 +64,12 @@ html {
 }
 
 .login-page-container {
+	width: 500px;
+	height: 350px;
     display: flex;
     flex-direction: column;
+	justify-content: center;
+	text-align: center;
     padding: 15px 25px;
     border: 1px solid #bbb;
     border-radius: 5px;
@@ -108,15 +112,24 @@ html {
     border-color: #0af;
 }
 #submit {
-    align-self: flex-end;
-    padding: 5px 10px;
+    margin: 5px auto;
+    padding: 8px 25px;
     border: 1px solid #0af;
     border-radius: 5px;
     outline: none;
     background-color: #0af;
     color: #fff;
     font-weight: bold;
-    width: 100%;
+    width: fit-content;
+}
+
+#error {
+	background-color: rgb(255, 189, 189);
+	border: solid 1px red;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: center;
+	color: red;
 }
 
 .join-link {

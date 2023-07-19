@@ -31,19 +31,9 @@
                         <th>パスワード</th>
                         <td><input type="password" name="password"></td>
                     </tr>
-                    <tr>
-                        <td><input type="submit" value="ログイン" id="submit"></td>
-                    </tr>
                 </table>
+                <input type="submit" value="ログイン" id="submit">
 		    </form>
-        </div>
-        <div class="join-link">
-	        <a href="./join">新規登録</a>
-        </div>
-    </main>
-</body>
-</html>
-
 <%
 	if(error != null){
 %>
@@ -51,6 +41,17 @@
 <%
 	}
 %>
+        </div>
+        <div class="join-link">
+	        <a href="./join">新規登録</a>
+        </div>
+        <div class="join-link">
+	        <a href="./top">ゲストモード</a>
+        </div>
+    </main>
+</body>
+</html>
+
 	</main>
 </body>
 </html>
