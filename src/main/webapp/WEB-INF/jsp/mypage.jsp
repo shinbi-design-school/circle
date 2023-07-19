@@ -7,15 +7,6 @@
 <%
 	User user = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 	String iconFileName = user.getIconFileName();
-	String error = (String)request.getAttribute("error");
-	int id = 0;
-	String email = "";
-	String name = "";
-	if(user != null) {
-		id = user.getId();
-		email = user.getEmail();
-		name = user.getName();
-	}
 %>
 
 <!DOCTYPE html>
@@ -67,32 +58,26 @@ $(function() {
 	        </form>
 	        
 	        <div class="mypage_information_table">
-	        <form method="post" action="user">
 	            <table>
 	                <tr>
 	                    <th>NAME：</th>
 	                    <td><%= user.getName() %></td>
-	                    <td><input type="text" name="name" value="<%= name %>"></td>
 	                </tr>
 	                <tr>
 	                    <th>E-MAIL：</th>
 	                    <td><%= user.getEmail() %></td>
-	                    <td><input type="email" name="email" value="<%= email %>"></td>
 	                </tr>
 	                <tr>
 	                    <th>PASSWORD：</th>
 	                    <td><%= user.getPassword() %></td>
-	                    <td><input type="password" name="password"></td>
-	                    <td><input type="password" name="confirmed"></td>
-	                    <td>
 	                </tr>
 	                <tr>
-	                    <td>
-	                        <input type="submit" name="submit">
-	                    </td>
-	                </tr>
+	                	<th>編集</th>
+	                	<td>
+	                		<a href="./user">
+	                			<span class="icon fas fa-pencil-alt"></span>
+	                		</a>
 	            </table>
-	            <input type="hidden" name="id" value="<%= id %>">
 	        </div>
 	    </div>
 	    <hr>
