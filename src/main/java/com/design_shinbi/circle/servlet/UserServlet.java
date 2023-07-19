@@ -1,9 +1,7 @@
 package com.design_shinbi.circle.servlet;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,50 +56,4 @@ public class UserServlet extends BaseServlet {
 		return jsp;
 	}
 
-	private String editUser(HttpServletRequest request, UserDAO dao)
-			throws NumberFormatException, SQLException {
-		String id = request.getParameter("id");
-		User user = dao.findById(Integer.parseInt(id));
-		request.setAttribute("user", user);
-		String jsp = "/WEB-INF/jsp/mypage.jsp";
-
-		return jsp;
-	}
-
-	private String updateUser(HttpServletRequest request, UserDAO dao)
-			throws SQLException, NoSuchAlgorithmException {
-		String jsp = null;
-		String error = "";
-
-		int id = Integer.parseInt(request.getParameter("id"));
-
-		String name = request.getParameter("name");
-		if (name == null || name.isEmpty()) {
-			error += "名前を入力してください。";
-		}
-
-		String isAdmin = request.getParameter("is_admin");
-
-		String password = request.getParameter("password");
-		String confirmed = request.getParameter("confirmed");
-
-		if (!password.equals(confirmed)) {
-			error += "パスワードが一致しません。";
-		}
-
-		if (error.isEmpty()) {
-			dao.updateUser(id, name, Boolean.parseBoolean(isAdmin));
-			if (!password.isEmpty()) {
-				dao.updatePassword(id, password);
-			}
-			jsp = this.getList(request, dao);
-		} else {
-			User user = dao.findById(id);
-			request.setAttribute("user", user);
-			request.setAttribute("error", error);
-			jsp = "/WEB-INF/jsp/mypage.jsp";
-		}
-
-		return jsp;
-	}
 }
