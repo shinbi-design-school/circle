@@ -104,6 +104,53 @@ class Particle {
   }
 }
 
+class Flash {
+  constructor(x, y, r, span) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    this.span = span;
+    this.flashLen = 10;
+    this.timer = 0;
+    this.color = 'rgba(255, 255, 255, 0.8)';
+    this.gradientColor = 'rgba(0, 0, 255, 0)';
+    this.power = 0;
+  }
+
+  flash() {
+    this.timer = this.flashLen;
+  }
+
+  rotation() {
+    if (this.timer < 0) {
+      return
+    }
+
+    if (this.timer > this.flashLen * 0.9){
+      this.power = Math.sin(Math.PI / 2 * ((this.flashLen - this.timer) / (this.flashLen * 0.1))) ** 2 ;
+    } else {
+      this.power = Math.sin(Math.PI / 2 * (this.timer / this.flashLen * 0.9)) ** 2;
+    }
+
+    this.timer -= 1;
+  }
+
+  render(ctx){
+    this.rotation();
+
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y);
+
+    ctx.shadowBlur = 0;
+    let gradient  = ctx.createRadialGradient(this.x, this.y, this.r / 15 * this.power, this.x, this.y, this.r * this.power);
+    gradient.addColorStop(0, this.color);
+    gradient.addColorStop(1, this.gradientColor);
+    ctx.fillStyle = gradient;
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 	
 	const cvs = document.getElementsByClassName('background')[0];
@@ -121,12 +168,19 @@ document.addEventListener('DOMContentLoaded', () => {
 	let particles = []
 	particles.push(new Particle(width / 2, height / 2));
 	
+	let flash = new Flash(width / 2, height / 2, 80, 250);
+	
 	let timer = 0;
 	const loop = () => {
-	  timer += 1;
+	  if (timer % 250 == 0){
+		  flash.flash();
+	  }
+		
 	  if (timer % 2 == 0 && timer % 250 <= 50){
 	    particles.push(new Particle(width / 2, height / 2));
 	  }
+
+	  timer = timer <= 250 ? timer + 1 : 0;
 	
 	
 	  cvs.width = cvs.clientWidth;
@@ -145,6 +199,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	    } 
 	    i++
 	  }
+	  
+	  flash.render(ctx);
+	  
 	  requestAnimationFrame(loop);
 	}
 	loop();
