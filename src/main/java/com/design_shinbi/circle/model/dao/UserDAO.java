@@ -250,6 +250,42 @@ public class UserDAO {
 		return user;
 	}
 
+	public User updateName(int id, String name) throws SQLException, NoSuchAlgorithmException {
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+
+		User user = this.findById(id);
+
+		String sql = "UPDATE users SET name = ?, updated_at = ? WHERE id = ?";
+		PreparedStatement statement = this.connection.prepareStatement(sql);
+
+		statement.setString(1, name);
+		statement.setTimestamp(2, now);
+		statement.setInt(3, id);
+		statement.executeUpdate();
+		statement.close();
+
+		user = this.findById(id);
+		return user;
+	}
+
+	public User updateEmail(int id, String email) throws SQLException, NoSuchAlgorithmException {
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+
+		User user = this.findById(id);
+
+		String sql = "UPDATE users SET email = ?, updated_at = ? WHERE id = ?";
+		PreparedStatement statement = this.connection.prepareStatement(sql);
+
+		statement.setString(1, email);
+		statement.setTimestamp(2, now);
+		statement.setInt(3, id);
+		statement.executeUpdate();
+		statement.close();
+
+		user = this.findById(id);
+		return user;
+	}
+
 	public void removeIcon(int id) throws SQLException {
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 
