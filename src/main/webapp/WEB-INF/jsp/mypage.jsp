@@ -4,9 +4,9 @@
 <%@ page import="com.design_shinbi.circle.model.entity.User" %>
 <%@ page import="com.design_shinbi.circle.model.Const" %>
 <%@ page import="com.design_shinbi.circle.model.Ranking" %>
+<%@ page import="com.design_shinbi.circle.model.Quiz" %>
 <%@ page import="java.util.List" %>
 <%@ page import="javax.servlet.ServletContext" %>
-<%@ page import="com.design_shinbi.circle.model.Quiz" %>
 
 <%
 	User user = (User)session.getAttribute(Const.LOGIN_USER_KEY);
@@ -97,13 +97,29 @@ $(function() {
 %>
 					<table>
 							<tr>
-								<th class="mypage_ranking<%=i + 1 %>"><%=i + 1 %>></th>
-								<th></th>
+								<th class="mypage_ranking_<%= i+1 %>>" ><%= i+1 %></th>
+								<th class="mypage_ranking_name" ><%= scores.get(i).getUserName() %></th>
 							</tr
 					</table>
-		
+<%
+	}
+%>
 	        </div>
-	    </div>
+	        <div class="mypage_history">
+	            <h3>プレイ履歴</h3>
+<%
+	for (int i = 0; i < view; i++){
+%>
+					<table>
+							<tr>
+								<th ><%=   %></th>
+							</tr
+					</table>
+<%
+	}
+%>
+	        </div>
+	    </div> 
 	</div>
 </div>	
 </body>
