@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.design_shinbi.circle.model.Const;
 import com.design_shinbi.circle.model.Quiz;
-import com.design_shinbi.circle.model.entity.User;
 
 @WebServlet("/play")
 public class QuizServlet extends BaseServlet{
@@ -20,14 +18,14 @@ public class QuizServlet extends BaseServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String jsp = null;
 		HttpSession session = req.getSession();
-		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
-		
-		//ログインしているかどうかの分岐処理
-		if (loginUser == null) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/top");
-			dispatcher.forward(req, resp);
-			return;
-		}
+//		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
+//		
+//		//ログインしているかどうかの分岐処理
+//		if (loginUser == null) {
+//			RequestDispatcher dispatcher = req.getRequestDispatcher("/top");
+//			dispatcher.forward(req, resp);
+//			return;
+//		}
 		
 		Quiz quiz = (Quiz)session.getAttribute("quiz");
 		

@@ -21,12 +21,12 @@ public class TopServlet extends BaseServlet {
 		User user = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 		
 		String jsp = null;
-		if(user == null) {
-			jsp = "/WEB-INF/jsp/login.jsp";
-		} else {
-			jsp = "/WEB-INF/jsp/title.jsp";
-//			jsp = "/WEB-INF/jsp/standby.jsp";
-		}
+//		if(user == null) {
+//			jsp = "/WEB-INF/jsp/login.jsp";
+//		} else {
+//			jsp = "/WEB-INF/jsp/title.jsp";
+//		}
+		jsp = "/WEB-INF/jsp/title.jsp";
 		
 		try {
 			RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);

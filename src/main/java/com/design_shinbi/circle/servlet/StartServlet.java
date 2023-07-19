@@ -26,17 +26,22 @@ public class StartServlet extends BaseServlet {
 		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 		
 		//ログインしているかどうかの分岐処理
-		if (loginUser == null) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/top");
-			dispatcher.forward(req, resp);
-			return;
-		}
+//		if (loginUser == null) {
+//			RequestDispatcher dispatcher = req.getRequestDispatcher("/top");
+//			dispatcher.forward(req, resp);
+//			return;
+//		}
 		
 		try (Connection connection = DbUtil.connect()){
 			QuizDAO dao = new QuizDAO(connection);
 			Quiz quiz = new Quiz(dao);	
-			quiz.setUserId(loginUser.getId());
-			quiz.setUserName(loginUser.getName());
+			if (loginUser != null) {
+				quiz.setUserId(loginUser.getId());
+				quiz.setUserName(loginUser.getName());				
+			} else {
+				quiz.setUserId(-1);
+				quiz.setUserName("Guest");
+			}
 			connection.close();
 			
 			session.setAttribute("quiz", quiz);

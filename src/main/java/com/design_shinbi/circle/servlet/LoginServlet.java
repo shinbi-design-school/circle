@@ -21,12 +21,32 @@ public class LoginServlet extends BaseServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
+		
+		//ログインしているならトップ画面に飛ばす
+		if (loginUser != null) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/top");
+			dispatcher.forward(req, resp);
+			return;
+		}
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 		dispatcher.forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		User loginUser = (User)session.getAttribute(Const.LOGIN_USER_KEY);
+		
+		//ログインしているならトップ画面に飛ばす
+		if (loginUser != null) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/top");
+			dispatcher.forward(req, resp);
+			return;
+		}
+		
 		try {
 			Connection connection = DbUtil.connect();
 			String jsp = null;
@@ -56,7 +76,6 @@ public class LoginServlet extends BaseServlet{
 				req.setAttribute("error", error);
 				jsp = "/WEB-INF/jsp/login.jsp";
 			} else {
-				HttpSession session = req.getSession();
 				session.setAttribute(Const.LOGIN_USER_KEY, user);
 				jsp = "/WEB-INF/jsp/title.jsp";
 			}

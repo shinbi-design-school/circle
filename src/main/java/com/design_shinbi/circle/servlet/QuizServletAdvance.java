@@ -113,14 +113,16 @@ public class QuizServletAdvance extends BaseServlet{
 	private void resultProcess(Quiz quiz) throws SQLException {
 		quiz.finish();
 		ServletContext application = this.getServletContext();
-		Ranking ranking = (Ranking)application.getAttribute("ranking");
-		ranking.insertScore(quiz);
+		if (quiz.getUserId() != -1) {
+			Ranking ranking = (Ranking)application.getAttribute("ranking");
+			ranking.insertScore(quiz);			
 		
-		try (Connection connection = DbUtil.connect()){
-			QuizDAO dao = new QuizDAO(connection);	
-			dao.insertPlayLog(quiz);
-		} catch (SQLException | NoSuchAlgorithmException | ClassNotFoundException e) {
-			e.printStackTrace();
+			try (Connection connection = DbUtil.connect()){
+				QuizDAO dao = new QuizDAO(connection);	
+				dao.insertPlayLog(quiz);
+			} catch (SQLException | NoSuchAlgorithmException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

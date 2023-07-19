@@ -4,10 +4,14 @@
 <%@ page import="com.design_shinbi.circle.model.Quiz" %>
 <%@ page import="com.design_shinbi.circle.model.Question" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.design_shinbi.circle.model.entity.User" %>
+<%@ page import="com.design_shinbi.circle.model.Const" %>
 
 <%
 	Quiz quiz = (Quiz)session.getAttribute("quiz");
 	String correctRate = String.format("%.1f", quiz.getCorrectRate() * 100);
+	
+	User user = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 %>
 
 <!DOCTYPE html>
@@ -61,12 +65,18 @@
 %>
 		</table>
 	</div>
+<%
+	if (user != null){
+%>
 	<div class="ranking">
 		<div class="ranking-link">
 			<a href="./ranking" title="ランキング">RANKING</a>
 		</div>
 	</div>
-	
+
+<%
+	}
+%>
 	<div class="stuffed-roll">
 		<div class="intro-mv">
     		<video autoplay muted loop src="movie/stuffed-roll.mp4" class="stuffed-roll-mv mv-hidden"></video>

@@ -6,6 +6,15 @@
 
 <%
 	User user = (User)session.getAttribute(Const.LOGIN_USER_KEY);
+	String userName = null;
+	boolean authority = false;
+	
+	if (user != null){
+		userName = user.getName();
+		authority = user.isAdmin();		
+	} else {
+		userName = "Guest";
+	}
 %>
 
   <header class="header">
@@ -17,13 +26,27 @@
 
         <ul class="header-nav__items">
           <li class="header-nav__item header-nav__name">
-			<a href="./user"><%=user.getName() %></a>
+			<a href="./user"><%=userName %></a>
           </li>
+<%
+	if (user != null){
+%>
           <li class="header-nav__item header-nav__name">
           	<a href="./logout">ログアウト</a>
           </li>
 <%
-	if(user.isAdmin()){
+	} else {
+%>
+          <li class="header-nav__item header-nav__name">
+          	<a href="./join">新規登録</a>
+          </li>
+<%
+	}
+%>
+
+
+<%
+	if(authority){
 %>
           <li class="header-nav__item header-nav__authority">管理画面へ</li>
 <%
