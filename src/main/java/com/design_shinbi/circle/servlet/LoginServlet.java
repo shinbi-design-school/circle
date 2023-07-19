@@ -57,12 +57,12 @@ public class LoginServlet extends BaseServlet{
 			
 			String email = req.getParameter("email");
 			if(email == null || email.isEmpty()) {
-				error = "メールアドレスを入力してください。";
+				error = "メールアドレスを入力してください。<br>";
 			}
 			
 			String password = req.getParameter("password");
 			if(password == null || password.isEmpty()) {
-				error = error + "パスワードを入力してください。";
+				error = error + "パスワードを入力してください。<br>";
 			}
 			
 			if (error.isEmpty()) {
@@ -71,7 +71,7 @@ public class LoginServlet extends BaseServlet{
 			
 			if (user == null) {
 				if (error.isEmpty()) {
-					error = "メールアドレスかパスワードが間違っています。";
+					error = "メールアドレスかパスワードが間違っています。<br>";
 				}
 				req.setAttribute("error", error);
 				jsp = "/WEB-INF/jsp/login.jsp";
