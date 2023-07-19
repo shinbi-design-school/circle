@@ -2,6 +2,8 @@ package com.design_shinbi.circle.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import com.design_shinbi.circle.model.Quiz;
 import com.design_shinbi.circle.model.Ranking;
+import com.design_shinbi.circle.model.dao.QuizDAO;
+import com.design_shinbi.circle.util.DbUtil;
 
 @WebServlet("/advance")
 public class QuizServletAdvance extends BaseServlet{
@@ -111,5 +115,12 @@ public class QuizServletAdvance extends BaseServlet{
 		ServletContext application = this.getServletContext();
 		Ranking ranking = (Ranking)application.getAttribute("ranking");
 		ranking.insertScore(quiz);
+		
+		try (Connection connection = DbUtil.connect()){
+			QuizDAO dao = new QuizDAO(connection);	
+			dao.insertPlayLog(quiz);
+		} catch (SQLException | NoSuchAlgorithmException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }

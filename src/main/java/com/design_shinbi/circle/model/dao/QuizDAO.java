@@ -5,11 +5,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.design_shinbi.circle.model.Const;
 import com.design_shinbi.circle.model.Question;
+import com.design_shinbi.circle.model.Quiz;
+import com.design_shinbi.circle.model.entity.User;
 
 public class QuizDAO {
 	protected Connection connection;
@@ -52,5 +58,53 @@ public class QuizDAO {
 		statement.close();
 		
 		return questions;
+	}
+	
+	public void insertPlayLog(Quiz quiz) throws SQLException {
+
+		String sql = "INSERT INTO `result` (user_id, score, created_at) VALUES (?, ?, ?)";
+		PreparedStatement statement = this.connection.prepareStatement(sql);
+		
+		statement.setInt(1, quiz.getUserId());
+		statement.setInt(2, quiz.calcScore());
+		statement.setTimestamp(3, Timestamp.valueOf(quiz.getFinishTime()));
+		
+		statement.executeUpdate();
+		
+		statement.close();
+	}
+	
+	public List<HashMap<String, String>> getPlayLog(User user, int limit) throws SQLException {
+		return getPlayLog(user.getId(), limit);
+	}
+	
+	public List<HashMap<String, String>> getPlayLog(int userId, int limit) throws SQLException {
+		
+		String sql = "SELECT score, created_at FROM result WHERE user_id = ? ORDER BY created_at DESC LIMIT ?";
+		
+		PreparedStatement statement = this.connection.prepareStatement(sql);
+		statement.setInt(1, userId);
+		statement.setInt(2, limit);
+		
+		ResultSet rs = statement.executeQuery();
+		List<HashMap<String,String>> result = new ArrayList<>();
+		
+		while (rs.next()) {
+			String score = String.valueOf(rs.getInt("score"));
+			LocalDateTime timestamp = rs.getTimestamp("created_at").toLocalDateTime();
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("y年M月d日 (E) H時m分s秒");
+			String timestampStr = dtf.format(timestamp);
+
+			HashMap<String,String> row = new HashMap<String,String>(){
+				{
+				put("score", score);
+				put("timestamp", timestampStr);
+				}				
+			};
+			result.add(row);
+		}
+
+		return result;
 	}
 }
