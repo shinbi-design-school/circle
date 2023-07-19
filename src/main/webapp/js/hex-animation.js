@@ -12,7 +12,7 @@ class Particle {
     } else {
       this.angle = Math.PI * 2;
     }
-    this.speed = 8;
+    this.speed = 16;
     this.bones = [];
     this.boneLimit = 6
     this.distTotal = 0;
@@ -112,8 +112,9 @@ class Flash {
     this.span = span;
     this.flashLen = 10;
     this.timer = 0;
-    this.color = 'rgba(255, 255, 255, 0.8)';
-    this.gradientColor = 'rgba(0, 0, 255, 0)';
+    this.color = 'rgba(255, 255, 255, 1)';
+    this.gradientColor1 = 'rgba(0, 0, 255, 0.4)';
+    this.gradientColor2 = 'rgba(0, 0, 255, 0)';
     this.power = 0;
   }
 
@@ -142,9 +143,10 @@ class Flash {
     ctx.moveTo(this.x, this.y);
 
     ctx.shadowBlur = 0;
-    let gradient  = ctx.createRadialGradient(this.x, this.y, this.r / 15 * this.power, this.x, this.y, this.r * this.power);
+    let gradient  = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * this.power);
     gradient.addColorStop(0, this.color);
-    gradient.addColorStop(1, this.gradientColor);
+    gradient.addColorStop(0.375, this.gradientColor1);
+    gradient.addColorStop(1, this.gradientColor2);
     ctx.fillStyle = gradient;
     ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
     ctx.fill();
@@ -168,19 +170,21 @@ document.addEventListener('DOMContentLoaded', () => {
 	let particles = []
 	particles.push(new Particle(width / 2, height / 2));
 	
-	let flash = new Flash(width / 2, height / 2, 80, 250);
+	const span = 200;
+	
+	let flash = new Flash(width / 2, height / 2, 80, span);
 	
 	let timer = 0;
 	const loop = () => {
-	  if (timer % 250 == 0){
+	  if (timer % span == 0){
 		  flash.flash();
 	  }
 		
-	  if (timer % 2 == 0 && timer % 250 <= 50){
+	  if (timer % 2 == 0 && timer % span <= 50){
 	    particles.push(new Particle(width / 2, height / 2));
 	  }
 
-	  timer = timer <= 250 ? timer + 1 : 0;
+	  timer = timer <= span ? timer + 1 : 0;
 	
 	
 	  cvs.width = cvs.clientWidth;
