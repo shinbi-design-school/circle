@@ -19,10 +19,12 @@
   <link rel="stylesheet" type="text/css" href="css/header.css">
   <link rel="stylesheet" type="text/css" href="css/transition.css">
   <script src="./js/stuffed_roll.js"></script>
+  <script src="./js/hex-animation.js"></script>
 <title>リザルト</title>
 </head>
 <body>
 <jsp:include page="header.jsp" />
+	<canvas class="background"></canvas>
 	<section class="result">
 	
 		<div class="result_inner">
@@ -44,7 +46,7 @@
 	</section>
 	
 	<div class="result_table">
-		<p class="result_head">回答履歴</p>
+		<p class="result_head">履歴</p>
 		<table>
 <%
 	for (Question question : quiz.getQuestions()){
