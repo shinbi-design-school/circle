@@ -69,6 +69,7 @@
     </div>
   <canvas class="particles"></canvas>
   <canvas class="judgement-canvas canvas-hidden"></canvas>
+  <div class="background"></div>
   </main>
 <%--
   <div class="play-await">
