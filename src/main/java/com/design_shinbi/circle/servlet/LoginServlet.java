@@ -15,7 +15,7 @@ import com.design_shinbi.circle.model.dao.UserDAO;
 import com.design_shinbi.circle.model.entity.User;
 import com.design_shinbi.circle.util.DbUtil;
 
-@WebServlet("/login")
+@WebServlet(urlPatterns = {"/login", "/"})
 public class LoginServlet extends BaseServlet{
 	
 
