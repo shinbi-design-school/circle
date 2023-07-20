@@ -49,7 +49,6 @@ public class Ranking {
 		return null;
 	}
 	
-	//前処理でロック回数を減らす
 	public void insertScore(Quiz quiz) throws SQLException {
 		//もしquizのステータスがfinishでないなら早期return
 		if (!quiz.getState().equals("finish")) {
@@ -60,17 +59,23 @@ public class Ranking {
 		//二部探索でquizを挿入する位置を求める
 		int rank = Collections.binarySearch(scores, quiz);
 		rank = Math.abs(rank);
-		rank -= 1;
 		
 		//もしランキング外だったらreturn
 		if (rank >= Const.RANKING_SIZE_MAX) {
 			return;
-		}
-		
-		insertScoreInner(quiz, rank);
+		}		
+
+		this.insertScoreInner(quiz);
 	}
+	
+	public synchronized void insertScoreInner(Quiz quiz) throws SQLException {		
+		//ランキング再計算
+		int rank = Collections.binarySearch(scores, quiz);
+		rank = Math.abs(rank);
+		if (rank >= Const.RANKING_SIZE_MAX) {
+			return;
+		}		
 		
-	public synchronized void insertScoreInner(Quiz quiz, int rank) throws SQLException {		
 		//とりあえずソートしておく。
 		//this.sort();
 		
