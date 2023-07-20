@@ -1,4 +1,4 @@
-package com.design_shinbi.circle.model;
+package com.design_shinbi.circle.model.entity;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;

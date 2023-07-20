@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.design_shinbi.circle.model.Const;
-import com.design_shinbi.circle.model.Question;
 import com.design_shinbi.circle.model.Quiz;
+import com.design_shinbi.circle.model.entity.Question;
 import com.design_shinbi.circle.model.entity.User;
 
 public class QuizDAO {

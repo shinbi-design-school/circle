@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 import org.junit.jupiter.api.Test;
 
-import com.design_shinbi.circle.model.Question;
 import com.design_shinbi.circle.model.Quiz;
 import com.design_shinbi.circle.model.dao.QuizDAO;
+import com.design_shinbi.circle.model.entity.Question;
 import com.design_shinbi.circle.util.DbUtil;
 
 class QuizTest {

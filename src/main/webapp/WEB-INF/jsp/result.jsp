@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.design_shinbi.circle.model.Quiz" %>
-<%@ page import="com.design_shinbi.circle.model.Question" %>
+<%@ page import="com.design_shinbi.circle.model.entity.Question" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.design_shinbi.circle.model.entity.User" %>
 <%@ page import="com.design_shinbi.circle.model.Const" %>

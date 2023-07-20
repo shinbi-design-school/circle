@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.design_shinbi.circle.model.dao.QuizDAO;
+import com.design_shinbi.circle.model.entity.Question;
 
 public class Quiz implements Comparable<Quiz>{
 	//レコード向けフィールド
