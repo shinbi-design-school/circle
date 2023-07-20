@@ -45,7 +45,7 @@
         <div class="join-link">
 	        <a href="./join">新規登録</a>
         </div>
-        <div class="join-link">
+        <div class="guest-link">
 	        <a href="./top">ゲストモード</a>
         </div>
     </main>
