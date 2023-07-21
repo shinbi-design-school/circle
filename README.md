@@ -2,7 +2,7 @@
 クイズシステム (SHINBIデザインスクール Java・Webプログラミング科5期 卒業制作)<BR>
 制作者氏名：内田佑基　横尾瞭　國安秀則<BR>
 使用言語：<BR>
-&emsp;Java17<BR>
+&emsp;JavaSE-17<BR>
 &emsp;JavaScript<BR>
 &emsp;HTML/CSS<BR>
 開発環境：<BR>
