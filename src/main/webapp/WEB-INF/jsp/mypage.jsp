@@ -92,10 +92,6 @@ $(function() {
 	                    <td><%= user.getEmail() %></td>
 	                </tr>
 	                <tr>
-	                    <th>PASSWORD：</th>
-	                    <td><%= user.getPassword() %></td>
-	                </tr>
-	                <tr>
 	                	<th>編集</th>
 	                	<td>
 	                		<a href="./user">
@@ -114,6 +110,7 @@ $(function() {
 					<table>
 							<tr>
 								<th class="mypage_ranking_<%= i+1 %>>" ><%= i+1 %></th>
+								<th><img class="mypage_ranking_icon" src="icon?id=<%=scores.get(i).getUserId() %>">
 								<th class="mypage_ranking_name" ><%= scores.get(i).getUserName() %></th>
 							</tr>
 					</table>
