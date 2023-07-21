@@ -26,6 +26,10 @@ public class Playlog {
 		this.logs = dao.getPlayLog(user, limit);
 	}
 	
+	public void setLimit(int value) {
+		this.limit = value;
+	}
+	
 	public List<HashMap<String, String>> getPlaylog(){
 		return this.logs;
 	}
