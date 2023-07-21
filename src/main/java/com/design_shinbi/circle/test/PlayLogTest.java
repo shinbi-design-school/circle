@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.design_shinbi.circle.model.Playlog;
 import com.design_shinbi.circle.model.dao.QuizDAO;
 import com.design_shinbi.circle.model.dao.UserDAO;
 import com.design_shinbi.circle.model.entity.User;
@@ -20,7 +21,9 @@ class PlayLogTest {
 			QuizDAO quizDao = new QuizDAO(connection);
 			User testUser = userDao.findById(2);
 			
-			List<HashMap<String, String>> logs = quizDao.getPlayLog(testUser, 5);
+			Playlog playLog = new Playlog(quizDao, testUser);
+			
+			List<HashMap<String, String>> logs = playLog.getPlaylog();
 			
 			for (HashMap<String, String> row : logs) {
 				System.out.printf("スコア：%s　、　日時：%s\n",row.get("score"), row.get("timestamp"));
