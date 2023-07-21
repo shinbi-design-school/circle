@@ -59,6 +59,7 @@ public class Ranking {
 		//二部探索でquizを挿入する位置を求める
 		int rank = Collections.binarySearch(scores, quiz);
 		rank = Math.abs(rank);
+		rank -= 1;
 		
 		//もしランキング外だったらreturn
 		if (rank >= Const.RANKING_SIZE_MAX) {
@@ -72,12 +73,13 @@ public class Ranking {
 		//ランキング再計算
 		int rank = Collections.binarySearch(scores, quiz);
 		rank = Math.abs(rank);
+		rank -= 1;
 		if (rank >= Const.RANKING_SIZE_MAX) {
 			return;
 		}		
 		
 		//とりあえずソートしておく。
-		//this.sort();
+		this.sort();
 		
 		//同じユーザーがいなかったらそのまま挿入
 		//同じユーザーがいた場合、古いレコードの方がスコアが低かったら挿入して、低い方を削除する。
