@@ -5,16 +5,32 @@
 <%@ page import="com.design_shinbi.circle.model.Const" %>
 <%@ page import="com.design_shinbi.circle.model.Ranking" %>
 <%@ page import="com.design_shinbi.circle.model.Quiz" %>
+<%@ page import="com.design_shinbi.circle.model.Playlog" %>
+<%@ page import="com.design_shinbi.circle.model.dao.QuizDAO" %> 
+<%@ page import="com.design_shinbi.circle.model.dao.UserDAO" %> 
+<%@ page import="com.design_shinbi.circle.util.DbUtil" %> 
+<%@ page import="java.sql.Connection" %> 
+<%@ page import="java.util.HashMap" %> 
 <%@ page import="java.util.List" %>
 <%@ page import="javax.servlet.ServletContext" %>
 
 <%
 	User user = (User)session.getAttribute(Const.LOGIN_USER_KEY);
 	String iconFileName = user.getIconFileName();
+	
 	Ranking ranking = (Ranking)application.getAttribute("ranking");
 	List<Quiz> scores = ranking.getScores();
-	
 	int view = 5;
+	
+	Connection connection = DbUtil.connect();
+	UserDAO userDao = new UserDAO(connection);
+	QuizDAO quizDao = new QuizDAO(connection);
+	
+	user = userDao.findById(user.getId());
+	
+	Playlog playLog = new Playlog(quizDao, user);
+	List<HashMap<String, String>> logs = playLog.getPlaylog();
+	
 %>
 
 <!DOCTYPE html>
@@ -99,7 +115,7 @@ $(function() {
 							<tr>
 								<th class="mypage_ranking_<%= i+1 %>>" ><%= i+1 %></th>
 								<th class="mypage_ranking_name" ><%= scores.get(i).getUserName() %></th>
-							</tr
+							</tr>
 					</table>
 <%
 	}
@@ -108,11 +124,11 @@ $(function() {
 	        <div class="mypage_history">
 	            <h3>プレイ履歴</h3>
 <%
-	for (int i = 0; i < view; i++){
+	for (HashMap<String, String> row : logs) {
 %>
 					<table>
 							<tr>
-								<th ><%= %></th>
+								<th ><%= row  %></th>
 							</tr
 					</table>
 <%

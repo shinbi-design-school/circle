@@ -16,22 +16,22 @@ class PlayLogTest {
 
 	@Test
 	void test() {
-		try (Connection connection = DbUtil.connect()){
+		try (Connection connection = DbUtil.connect()) {
 			UserDAO userDao = new UserDAO(connection);
 			QuizDAO quizDao = new QuizDAO(connection);
-			User testUser = userDao.findById(2);
-			
+			User testUser = userDao.findById(1);
+
 			Playlog playLog = new Playlog(quizDao, testUser);
-			
+
 			List<HashMap<String, String>> logs = playLog.getPlaylog();
-			
+
 			for (HashMap<String, String> row : logs) {
-				System.out.printf("スコア：%s　、　日時：%s\n",row.get("score"), row.get("timestamp"));
+				System.out.printf("スコア：%s　、　日時：%s\n", row.get("score"), row.get("timestamp"));
 			}
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 }
